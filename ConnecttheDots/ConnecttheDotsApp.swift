@@ -11,7 +11,7 @@ import SwiftUI
 struct ConnecttheDotsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Board()
         }
     }
 }
