@@ -11,22 +11,23 @@ private let screenWidth: CGFloat = UIScreen.main.bounds.size.width
 private let screenHeight: CGFloat = UIScreen.main.bounds.size.height
 
 struct Board: View {
-    var body: some View {
-        ZStack {
-            Color.black
-                .ignoresSafeArea()
-            Grid()
-            Horozontal()
-            Vertical()
-        }
-    }
-}
-
-struct Grid: View {
     
     @StateObject private var viewModel = Model()
     
     var body: some View {
+        ZStack {
+            Color.black
+                .ignoresSafeArea()
+            grid
+            horozontal
+            vertical
+            overlay
+        }.onAppear(perform: viewModel.start)
+    }
+}
+
+extension Board {
+    private var grid: some View {
         VStack(spacing: 0.0) {
             Spacer()
             ForEach(0..<10) { y in
@@ -35,7 +36,7 @@ struct Grid: View {
                         ZStack {
                             let i = x + y*10
                             Rectangle()
-                                .stroke(Color.white)
+                                .stroke(.white)
                                 .scaledToFit()
                             Circle()
                                 .fill(viewModel.end[i])
@@ -48,14 +49,11 @@ struct Grid: View {
                 }
             }
             Spacer()
-        }.onAppear(perform: viewModel.start)
+        }
     }
 }
-struct Horozontal: View {
-    
-    @StateObject private var viewModel = Model()
-    
-    var body: some View {
+extension Board {
+    private var horozontal: some View {
         VStack(spacing: 0.0) {
             Spacer()
             ForEach(0..<10) { y in
@@ -64,7 +62,7 @@ struct Horozontal: View {
                         ZStack {
                             let i = x + y*9
                             Rectangle()
-                                .stroke(Color.clear)
+                                .stroke(.clear)
                                 .frame(width: screenWidth/10, height: screenWidth/10)
                                 
                             Rectangle()
@@ -75,14 +73,11 @@ struct Horozontal: View {
                 }
             }
             Spacer()
-        }.onAppear(perform: viewModel.start)
+        }
     }
 }
-struct Vertical: View {
-    
-    @StateObject private var viewModel = Model()
-    
-    var body: some View {
+extension Board {
+    var vertical: some View {
         VStack(spacing: 0.0) {
             Spacer()
             ForEach(0..<9) { y in
@@ -91,7 +86,7 @@ struct Vertical: View {
                         ZStack {
                             let i = x + y*10
                             Rectangle()
-                                .stroke(Color.clear)
+                                .stroke(.clear)
                                 .scaledToFit()
                             Rectangle()
                                 .fill(viewModel.verticle[i])
@@ -101,10 +96,37 @@ struct Vertical: View {
                 }
             }
             Spacer()
-        }.onAppear(perform: viewModel.start)
+        }
     }
 }
-
+extension Board {
+    var overlay: some View {
+        VStack(spacing: 0.0) {
+            Spacer()
+            ForEach(0..<10) { y in
+                HStack(spacing: 0.0) {
+                    ForEach(0..<10) { x in
+                        var w = 0; var h = 0
+                        Rectangle()
+                            .fill(.clear)
+                            .scaledToFit()
+                            .contentShape(Rectangle())
+                            .gesture(DragGesture()
+                                .onChanged { value in
+                                    w = x + Int(value.translation.width/(screenWidth/10))
+                                    h = y + Int(value.translation.height/(screenWidth/10))
+                                    var i = w + h*10
+                                    if i > 79 { i = 79 }
+                                    viewModel.move(i: i)
+                                }
+                            )
+                    }
+                }
+            }
+            Spacer()
+        }
+    }
+}
 struct Board_Previews: PreviewProvider {
     static var previews: some View {
         Board()
