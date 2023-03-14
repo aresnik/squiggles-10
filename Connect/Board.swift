@@ -19,8 +19,7 @@ struct Board: View {
             Color.black
                 .ignoresSafeArea()
             grid
-            horozontal
-            vertical
+            middle
             overlay
         }.onAppear(perform: viewModel.start)
     }
@@ -40,10 +39,8 @@ extension Board {
                                 .scaledToFit()
                             Circle()
                                 .fill(viewModel.end[i])
-                                .frame(width: screenWidth/18)
-                            Circle()
-                                .fill(viewModel.corner[i])
-                                .frame(width: screenWidth/30)
+                                .frame(width: screenWidth/16)
+                            
                         }
                     }
                 }
@@ -53,44 +50,20 @@ extension Board {
     }
 }
 extension Board {
-    private var horozontal: some View {
+    private var middle: some View {
         VStack(spacing: 0.0) {
             Spacer()
             ForEach(0..<10) { y in
-                HStack(spacing: 0.0) {
-                    ForEach(0..<9) { x in
-                        ZStack {
-                            let i = x + y*9
-                            Rectangle()
-                                .stroke(.clear)
-                                .frame(width: screenWidth/10, height: screenWidth/10)
-                                
-                            Rectangle()
-                                .fill(viewModel.horizontal[i])
-                                .frame(width: screenWidth/10, height: screenWidth/30)
-                        }
-                    }
-                }
-            }
-            Spacer()
-        }
-    }
-}
-extension Board {
-    var vertical: some View {
-        VStack(spacing: 0.0) {
-            Spacer()
-            ForEach(0..<9) { y in
                 HStack(spacing: 0.0) {
                     ForEach(0..<10) { x in
                         ZStack {
                             let i = x + y*10
                             Rectangle()
                                 .stroke(.clear)
-                                .scaledToFit()
+                                .frame(width: screenWidth/10, height: screenWidth/10)
                             Rectangle()
-                                .fill(viewModel.verticle[i])
-                                .frame(width: screenWidth/30, height: screenWidth/10)
+                                .fill(viewModel.middle[i])
+                                .frame(width: screenWidth/30, height: screenWidth/30)
                         }
                     }
                 }
@@ -99,24 +72,24 @@ extension Board {
         }
     }
 }
+
 extension Board {
     var overlay: some View {
         VStack(spacing: 0.0) {
             Spacer()
-            ForEach(0..<10) { y in
+            ForEach(0..<10) { _ in
                 HStack(spacing: 0.0) {
-                    ForEach(0..<10) { x in
-                        var w = 0; var h = 0
+                    ForEach(0..<10) { _ in
                         Rectangle()
                             .fill(.clear)
-                            .scaledToFit()
                             .contentShape(Rectangle())
-                            .gesture(DragGesture()
+                            .gesture(DragGesture(coordinateSpace: .named("overlay"))
                                 .onChanged { value in
-                                    w = x + Int(value.translation.width/(screenWidth/10))
-                                    h = y + Int(value.translation.height/(screenWidth/10))
-                                    var i = w + h*10
-                                    if i > 79 { i = 79 }
+                                    let x = Int(value.location.x/(screenWidth/10))
+                                    let y = Int(value.location.y/(screenWidth/10))
+                                    var i = x + y*10
+                                    if i < 0  { i = 0  }
+                                    if i > 99 { i = 99 }
                                     viewModel.move(i: i)
                                 }
                             )
@@ -125,6 +98,8 @@ extension Board {
             }
             Spacer()
         }
+        .coordinateSpace(name: "overlay")
+        .frame(width: screenWidth, height: screenWidth)
     }
 }
 struct Board_Previews: PreviewProvider {

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		46AEEC6229AD00ED00A5128F /* ConnecttheDotsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AEEC6129AD00ED00A5128F /* ConnecttheDotsApp.swift */; };
+		46AEEC6229AD00ED00A5128F /* ConnectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AEEC6129AD00ED00A5128F /* ConnectApp.swift */; };
 		46AEEC6429AD00ED00A5128F /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AEEC6329AD00ED00A5128F /* Board.swift */; };
 		46AEEC6629AD00ED00A5128F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46AEEC6529AD00ED00A5128F /* Assets.xcassets */; };
 		46AEEC6929AD00ED00A5128F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46AEEC6829AD00ED00A5128F /* Preview Assets.xcassets */; };
@@ -15,8 +15,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		46AEEC5E29AD00ED00A5128F /* ConnecttheDots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConnecttheDots.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		46AEEC6129AD00ED00A5128F /* ConnecttheDotsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnecttheDotsApp.swift; sourceTree = "<group>"; };
+		46AEEC5E29AD00ED00A5128F /* Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connect.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		46AEEC6129AD00ED00A5128F /* ConnectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectApp.swift; sourceTree = "<group>"; };
 		46AEEC6329AD00ED00A5128F /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		46AEEC6529AD00ED00A5128F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		46AEEC6829AD00ED00A5128F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -37,7 +37,7 @@
 		46AEEC5529AD00EC00A5128F = {
 			isa = PBXGroup;
 			children = (
-				46AEEC6029AD00ED00A5128F /* ConnecttheDots */,
+				46AEEC6029AD00ED00A5128F /* Connect */,
 				46AEEC5F29AD00ED00A5128F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -45,21 +45,21 @@
 		46AEEC5F29AD00ED00A5128F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				46AEEC5E29AD00ED00A5128F /* ConnecttheDots.app */,
+				46AEEC5E29AD00ED00A5128F /* Connect.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		46AEEC6029AD00ED00A5128F /* ConnecttheDots */ = {
+		46AEEC6029AD00ED00A5128F /* Connect */ = {
 			isa = PBXGroup;
 			children = (
-				46AEEC6129AD00ED00A5128F /* ConnecttheDotsApp.swift */,
+				46AEEC6129AD00ED00A5128F /* ConnectApp.swift */,
 				46AEEC6329AD00ED00A5128F /* Board.swift */,
 				46AEEC6F29AD08FF00A5128F /* Model.swift */,
 				46AEEC6529AD00ED00A5128F /* Assets.xcassets */,
 				46AEEC6729AD00ED00A5128F /* Preview Content */,
 			);
-			path = ConnecttheDots;
+			path = Connect;
 			sourceTree = "<group>";
 		};
 		46AEEC6729AD00ED00A5128F /* Preview Content */ = {
@@ -73,9 +73,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		46AEEC5D29AD00ED00A5128F /* ConnecttheDots */ = {
+		46AEEC5D29AD00ED00A5128F /* Connect */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 46AEEC6C29AD00ED00A5128F /* Build configuration list for PBXNativeTarget "ConnecttheDots" */;
+			buildConfigurationList = 46AEEC6C29AD00ED00A5128F /* Build configuration list for PBXNativeTarget "Connect" */;
 			buildPhases = (
 				46AEEC5A29AD00ED00A5128F /* Sources */,
 				46AEEC5B29AD00ED00A5128F /* Frameworks */,
@@ -85,9 +85,9 @@
 			);
 			dependencies = (
 			);
-			name = ConnecttheDots;
+			name = Connect;
 			productName = ConnecttheDots;
-			productReference = 46AEEC5E29AD00ED00A5128F /* ConnecttheDots.app */;
+			productReference = 46AEEC5E29AD00ED00A5128F /* Connect.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -105,7 +105,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 46AEEC5929AD00ED00A5128F /* Build configuration list for PBXProject "ConnecttheDots" */;
+			buildConfigurationList = 46AEEC5929AD00ED00A5128F /* Build configuration list for PBXProject "Connect" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -118,7 +118,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				46AEEC5D29AD00ED00A5128F /* ConnecttheDots */,
+				46AEEC5D29AD00ED00A5128F /* Connect */,
 			);
 		};
 /* End PBXProject section */
@@ -142,7 +142,7 @@
 			files = (
 				46AEEC7029AD08FF00A5128F /* Model.swift in Sources */,
 				46AEEC6429AD00ED00A5128F /* Board.swift in Sources */,
-				46AEEC6229AD00ED00A5128F /* ConnecttheDotsApp.swift in Sources */,
+				46AEEC6229AD00ED00A5128F /* ConnectApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,21 +270,24 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ConnecttheDots/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Connect/Preview Content\"";
 				DEVELOPMENT_TEAM = 4P87YA35TA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Connect;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.alexanderresnik.ConnecttheDots;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alexanderresnik.Connect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -299,21 +302,24 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ConnecttheDots/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Connect/Preview Content\"";
 				DEVELOPMENT_TEAM = 4P87YA35TA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Connect;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.alexanderresnik.ConnecttheDots;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alexanderresnik.Connect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -324,7 +330,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		46AEEC5929AD00ED00A5128F /* Build configuration list for PBXProject "ConnecttheDots" */ = {
+		46AEEC5929AD00ED00A5128F /* Build configuration list for PBXProject "Connect" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				46AEEC6A29AD00ED00A5128F /* Debug */,
@@ -333,7 +339,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		46AEEC6C29AD00ED00A5128F /* Build configuration list for PBXNativeTarget "ConnecttheDots" */ = {
+		46AEEC6C29AD00ED00A5128F /* Build configuration list for PBXNativeTarget "Connect" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				46AEEC6D29AD00ED00A5128F /* Debug */,
