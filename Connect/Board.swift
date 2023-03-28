@@ -105,28 +105,20 @@ extension Board {
                                 return
                             }
                             
-                            // Create a new line starting at this dot
-                            viewModel.lines.append(Model.Line(color: dot.color, start: dot, end: dot))
-                        }
-                        .onChanged { value in
-                            // Find the dot that the touch is currently over
-                            let x = Int(value.location.x/(screenWidth/10))
-                            let y = Int(value.location.y/(screenWidth/10))
-                            guard let dot = viewModel.dots.first(where: { $0.x == x && $0.y == y }) else {
-                                return
-                            }
-                            
                             // Find the line that is currently being drawn
                             guard var line = viewModel.lines.last else {
+                                // Create a new line starting at this dot
+                                viewModel.lines.append(Model.Line(color: dot.color, start: dot, end: dot))
                                 return
                             }
-                            
+
                             // Update the end point of the line to the current dot
                             line.end = dot
                             
                             // Update the lines array with the new line
                             viewModel.lines[viewModel.lines.count - 1] = line
                         }
+
                         .onEnded { value in
                             // Find the dot that the touch ended on
                             let x = Int(value.location.x/(screenWidth/10))
