@@ -34,7 +34,7 @@ final class Model: ObservableObject {
         Line(color: .cyan,   segment: []),
         Line(color: .indigo, segment: []) ]
     @Published var dots: [Dot] = []
-    @Published var endDrag: Bool = false
+    @Published var k: Int = 0
     private var color: [Color] = [
         .red, .blue, .green, .orange, .yellow, .gray, .purple, .brown, .cyan, .indigo ].shuffled()
     
@@ -85,21 +85,15 @@ final class Model: ObservableObject {
         randomizecolors()
         drawDots()
     }
-    private var dot: Dot = Dot(color: .clear, dot: 0)
-    private var j: Int = 0
+   
     func move(i: Int) {
-        if dots.first(where: { $0.dot == i }) != nil {
-            dot = dots.first(where: { $0.dot == i }) ?? Dot(color: .clear, dot: 0)
-        }
-                
-        if endDrag == true { j += 1 }
-        endDrag = false
-        
+        let dot = dots.first { $0.dot == i }
         for j in 0..<lines.count {
-            if lines[j].color == dot.color {
-                lines[j].segment.append(i)
+            if lines[j].color == dot?.color ?? .clear {
+                k = j
             }
         }
+        lines[k].segment.append(i)
     }
     
     func isNeighbor(end1: Int, end2: Int) -> Bool {

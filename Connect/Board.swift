@@ -9,6 +9,7 @@ import SwiftUI
 
 private let screenWidth: CGFloat = UIScreen.main.bounds.size.width
 private let screenHeight: CGFloat = UIScreen.main.bounds.size.height
+private var i: Int = 0
 
 struct Board: View {
     
@@ -59,8 +60,8 @@ extension Board {
                     path.addLine(to: position(at: flow.middle[i]))
                 }
             }
-            .stroke(flow.color, lineWidth: 20)
-            .offset(CGSize(width: 45, height: 195))
+            .stroke(flow.color, lineWidth: 8)
+            .offset(CGSize(width: 20, height: 155))
         }
     }
     
@@ -81,8 +82,8 @@ extension Board {
                     path.addLine(to: position(at: line.segment[i]))
                 }
             }
-            .stroke(line.color, lineWidth: 20)
-            .offset(CGSize(width: 45, height: 195))
+            .stroke(line.color, lineWidth: 8)
+            .offset(CGSize(width: 20, height: 155))
         }
     }
 }
@@ -101,13 +102,16 @@ extension Board {
                                 .onChanged { value in
                                     let x = Int(value.location.x/(screenWidth/10))
                                     let y = Int(value.location.y/(screenWidth/10))
-                                    var i = x + y*10
+                                    i = x + y*10
                                     if i < 0  { i = 0  }
                                     if i > 99 { i = 99 }
                                     viewModel.move(i: i)
                                 }
                                 .onEnded { _ in
-                                    viewModel.endDrag = true
+                                    let dot = viewModel.dots.first { $0.dot == i }
+                                    if dot?.color ?? .clear == .clear {
+                                        viewModel.lines[viewModel.k].segment.removeAll()
+                                    }
                                 }
                             )
                     }
