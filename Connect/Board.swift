@@ -10,6 +10,7 @@ import SwiftUI
 private let screenWidth: CGFloat = UIScreen.main.bounds.size.width
 private let screenHeight: CGFloat = UIScreen.main.bounds.size.height
 private var i: Int = 0
+private var solution: Bool = false
 
 struct Board: View {
     
@@ -20,10 +21,12 @@ struct Board: View {
             Color.black
                 .ignoresSafeArea()
             grid
-//            middle
+            if solution { middle }
             drawLine
             overlay
-        }.onAppear(perform: viewModel.randomize)
+            button
+        }
+        .onAppear(perform: viewModel.randomize)
     }
 }
 
@@ -31,22 +34,24 @@ extension Board {
     private var grid: some View {
         VStack(spacing: 0.0) {
             Spacer()
-            ForEach(0..<10) { y in
-                HStack(spacing: 0.0) {
-                    ForEach(0..<10) { x in
-                        ZStack {
-                            Rectangle()
-                                .stroke(.white)
-                                .scaledToFit()
-                            let i = x + y*10
-                            let dot = viewModel.dots.first { $0.dot == i }
-                            Circle()
-                                .fill(dot?.color ?? .clear)
-                                .frame(width: screenWidth/16)
+            VStack(spacing: 0.0) {
+                ForEach(0..<10) { y in
+                    HStack(spacing: 0.0) {
+                        ForEach(0..<10) { x in
+                            ZStack {
+                                Rectangle()
+                                    .stroke(.white)
+                                let i = x + y*10
+                                let dot = viewModel.dots.first { $0.dot == i }
+                                Circle()
+                                    .fill(dot?.color ?? .clear)
+                                    .frame(width: screenWidth/16)
+                            }
                         }
                     }
                 }
             }
+            .frame(width: screenWidth, height: screenWidth)
             Spacer()
         }
     }
@@ -60,8 +65,8 @@ extension Board {
                     path.addLine(to: position(at: flow.middle[i]))
                 }
             }
-            .stroke(flow.color, lineWidth: 8)
-            .offset(CGSize(width: 20, height: 155))
+            .stroke(flow.color, lineWidth: screenWidth/40)
+            .offset(CGSize(width: screenWidth/20, height: screenWidth/2.44))
         }
     }
     
@@ -82,8 +87,8 @@ extension Board {
                     path.addLine(to: position(at: line.segment[i]))
                 }
             }
-            .stroke(line.color, lineWidth: 8)
-            .offset(CGSize(width: 20, height: 155))
+            .stroke(line.color, lineWidth: screenWidth/40)
+            .offset(CGSize(width: screenWidth/20, height: screenWidth/2.44))
         }
     }
 }
@@ -92,35 +97,87 @@ extension Board {
     var overlay: some View {
         VStack(spacing: 0.0) {
             Spacer()
-            ForEach(0..<10) { y in
-                HStack(spacing: 0.0) {
-                    ForEach(0..<10) { x in
-                        Rectangle()
-                            .fill(.clear)
-                            .contentShape(Rectangle())
-                            .gesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .named("overlay"))
-                                .onChanged { value in
-                                    let x = Int(value.location.x/(screenWidth/10))
-                                    let y = Int(value.location.y/(screenWidth/10))
-                                    i = x + y*10
-                                    if i < 0  { i = 0  }
-                                    if i > 99 { i = 99 }
-                                    viewModel.move(i: i)
-                                }
-                                .onEnded { _ in
+            VStack(spacing: 0.0) {
+                ForEach(0..<10) { y in
+                    HStack(spacing: 0.0) {
+                        ForEach(0..<10) { x in
+                            Rectangle()
+                                .fill(.clear)
+                                .contentShape(Rectangle())
+                                .simultaneousGesture(TapGesture().onEnded({
                                     let dot = viewModel.dots.first { $0.dot == i }
-                                    if dot?.color ?? .clear == .clear {
+                                    if dot?.color ?? .clear != .clear {
                                         viewModel.lines[viewModel.k].segment.removeAll()
                                     }
-                                }
-                            )
+                                }))
+                                .simultaneousGesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .named("overlay"))
+                                    .onChanged { value in
+                                        let x = Int(value.location.x/(screenWidth/10))
+                                        let y = Int(value.location.y/(screenWidth/10))
+                                        i = x + y*10
+                                        if i < 0  { i = 0  }
+                                        if i > 99 { i = 99 }
+                                        viewModel.move(i: i)
+                                    }
+                                    .onEnded { _ in
+//                                        if !viewModel.isPairConnected() {
+//                                            viewModel.lines[viewModel.k].segment.removeAll()
+//                                        }
+                                    }
+                                )
+                        }
                     }
                 }
             }
+            .coordinateSpace(name: "overlay")
+            .frame(width: screenWidth, height: screenWidth)
             Spacer()
         }
-        .coordinateSpace(name: "overlay")
-        .frame(width: screenWidth, height: screenWidth)
+        
+    }
+}
+
+extension Board {
+    private var button: some View {
+        VStack {
+            HStack {
+                Button(action: {
+                    viewModel.dots.removeAll()
+                    for i in 0..<viewModel.lines.count {
+                        viewModel.lines[i].segment.removeAll()
+                    }
+                    viewModel.randomize()
+                    solution = false
+                }, label: {
+                    Text("Play Again")
+                        .font(.system(size: 20))
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(
+                            Capsule()
+                                .stroke(Color.white, lineWidth: 2.0)
+                        )
+                })
+                Spacer()
+                Button(action: {
+                    solution = true
+                    for i in 0..<viewModel.lines.count {
+                        viewModel.lines[i].segment.removeAll()
+                    }
+                    viewModel.drawDots()
+                }, label: {
+                    Text("Solution")
+                        .font(.system(size: 20))
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(
+                            Capsule()
+                                .stroke(Color.white, lineWidth: 2.0)
+                        )
+                })
+            }
+            Spacer()
+        }
     }
 }
 

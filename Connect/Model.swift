@@ -12,7 +12,8 @@ final class Model: ObservableObject {
 
     // Initial flows
     @Published var flows: [Flow] = [
-        Flow(color: .red,    middle: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]),
+        Flow(color: .red,    middle: [0, 10, 20, 30, 40, 50, 60, 70, 80,
+                                     90, 91, 92, 93, 94, 95, 96, 97, 98, 99]),
         Flow(color: .blue,   middle: [1, 11, 21, 31, 41, 51, 61, 71, 81]),
         Flow(color: .green,  middle: [2, 12, 22, 32, 42, 52, 62, 72, 82]),
         Flow(color: .orange, middle: [3, 13, 23, 33, 43, 53, 63, 73, 83]),
@@ -35,6 +36,7 @@ final class Model: ObservableObject {
         Line(color: .indigo, segment: []) ]
     @Published var dots: [Dot] = []
     @Published var k: Int = 0
+    private var l: Int = -1
     private var color: [Color] = [
         .red, .blue, .green, .orange, .yellow, .gray, .purple, .brown, .cyan, .indigo ].shuffled()
     
@@ -85,7 +87,7 @@ final class Model: ObservableObject {
         randomizecolors()
         drawDots()
     }
-   
+    
     func move(i: Int) {
         let dot = dots.first { $0.dot == i }
         for j in 0..<lines.count {
@@ -93,8 +95,55 @@ final class Model: ObservableObject {
                 k = j
             }
         }
-        lines[k].segment.append(i)
+        if isWalkingBack(i: i) {
+            lines[k].segment.removeLast()
+        }
+        if isPairConnected() { return }
+        if lines[k].segment.last != nil {
+            if !isNeighbor(end1: lines[k].segment.last ?? 0, end2: i) {
+                return
+            }
+        }
+        if lines[k].segment.last != nil || dot != nil {
+            lines[k].segment.append(i)
+        }
+        if hasDuplicateLines(in: lines) {
+            lines[k].segment.removeLast()
+        }
     }
+    
+    func isWalkingBack(i: Int) -> Bool {
+        if lines[k].segment.contains(i) {
+            return true
+        }
+        return false
+    }
+    
+    func isPairConnected() -> Bool {
+        for i in 0..<flows.count {
+            if (lines[k].segment.first == flows[i].middle.first &&
+                lines[k].segment.last  == flows[i].middle.last) ||
+               (lines[k].segment.first == flows[i].middle.last  &&
+                lines[k].segment.last  == flows[i].middle.first) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func hasDuplicateLines(in lines: [Line]) -> Bool {
+           var set = Set<Int>()
+           for line in lines {
+               for integer in line.segment {
+                   if set.contains(integer) {
+                     return true
+                   } else {
+                       set.insert(integer)
+                   }
+               }
+           }
+           return false
+       }
     
     func isNeighbor(end1: Int, end2: Int) -> Bool {
         return ( abs(end1 - end2) == 1 || abs(end1 - end2) == 10 ) &&
