@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		46AEEC6229AD00ED00A5128F /* ConnectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AEEC6129AD00ED00A5128F /* ConnectApp.swift */; };
+		46AEEC6229AD00ED00A5128F /* SquigglesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AEEC6129AD00ED00A5128F /* SquigglesApp.swift */; };
 		46AEEC6429AD00ED00A5128F /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AEEC6329AD00ED00A5128F /* Board.swift */; };
 		46AEEC6629AD00ED00A5128F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46AEEC6529AD00ED00A5128F /* Assets.xcassets */; };
 		46AEEC6929AD00ED00A5128F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46AEEC6829AD00ED00A5128F /* Preview Assets.xcassets */; };
@@ -15,8 +15,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		46AEEC5E29AD00ED00A5128F /* Connect 10.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Connect 10.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		46AEEC6129AD00ED00A5128F /* ConnectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectApp.swift; sourceTree = "<group>"; };
+		46AEEC5E29AD00ED00A5128F /* Squiggles 10.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Squiggles 10.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		46AEEC6129AD00ED00A5128F /* SquigglesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquigglesApp.swift; sourceTree = "<group>"; };
 		46AEEC6329AD00ED00A5128F /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		46AEEC6529AD00ED00A5128F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		46AEEC6829AD00ED00A5128F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -37,7 +37,7 @@
 		46AEEC5529AD00EC00A5128F = {
 			isa = PBXGroup;
 			children = (
-				46AEEC6029AD00ED00A5128F /* Connect */,
+				46AEEC6029AD00ED00A5128F /* Squiggles */,
 				46AEEC5F29AD00ED00A5128F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -45,21 +45,21 @@
 		46AEEC5F29AD00ED00A5128F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				46AEEC5E29AD00ED00A5128F /* Connect 10.app */,
+				46AEEC5E29AD00ED00A5128F /* Squiggles 10.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		46AEEC6029AD00ED00A5128F /* Connect */ = {
+		46AEEC6029AD00ED00A5128F /* Squiggles */ = {
 			isa = PBXGroup;
 			children = (
-				46AEEC6129AD00ED00A5128F /* ConnectApp.swift */,
+				46AEEC6129AD00ED00A5128F /* SquigglesApp.swift */,
 				46AEEC6329AD00ED00A5128F /* Board.swift */,
 				46AEEC6F29AD08FF00A5128F /* Model.swift */,
 				46AEEC6529AD00ED00A5128F /* Assets.xcassets */,
 				46AEEC6729AD00ED00A5128F /* Preview Content */,
 			);
-			path = Connect;
+			path = Squiggles;
 			sourceTree = "<group>";
 		};
 		46AEEC6729AD00ED00A5128F /* Preview Content */ = {
@@ -73,9 +73,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		46AEEC5D29AD00ED00A5128F /* Connect */ = {
+		46AEEC5D29AD00ED00A5128F /* Squiggles */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 46AEEC6C29AD00ED00A5128F /* Build configuration list for PBXNativeTarget "Connect" */;
+			buildConfigurationList = 46AEEC6C29AD00ED00A5128F /* Build configuration list for PBXNativeTarget "Squiggles" */;
 			buildPhases = (
 				46AEEC5A29AD00ED00A5128F /* Sources */,
 				46AEEC5B29AD00ED00A5128F /* Frameworks */,
@@ -85,9 +85,9 @@
 			);
 			dependencies = (
 			);
-			name = Connect;
+			name = Squiggles;
 			productName = ConnecttheDots;
-			productReference = 46AEEC5E29AD00ED00A5128F /* Connect 10.app */;
+			productReference = 46AEEC5E29AD00ED00A5128F /* Squiggles 10.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -105,7 +105,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 46AEEC5929AD00ED00A5128F /* Build configuration list for PBXProject "Connect" */;
+			buildConfigurationList = 46AEEC5929AD00ED00A5128F /* Build configuration list for PBXProject "Squiggles" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -118,7 +118,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				46AEEC5D29AD00ED00A5128F /* Connect */,
+				46AEEC5D29AD00ED00A5128F /* Squiggles */,
 			);
 		};
 /* End PBXProject section */
@@ -142,7 +142,7 @@
 			files = (
 				46AEEC7029AD08FF00A5128F /* Model.swift in Sources */,
 				46AEEC6429AD00ED00A5128F /* Board.swift in Sources */,
-				46AEEC6229AD00ED00A5128F /* ConnectApp.swift in Sources */,
+				46AEEC6229AD00ED00A5128F /* SquigglesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,11 +270,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Connect/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Squiggles/Preview Content\"";
 				DEVELOPMENT_TEAM = 4P87YA35TA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Connect 10";
+				INFOPLIST_KEY_CFBundleDisplayName = Squiggles;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -288,7 +288,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.alexanderresnik.Connect;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alexanderresnik.squiggles;
 				PRODUCT_NAME = "$(TARGET_NAME) 10";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -303,11 +303,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Connect/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Squiggles/Preview Content\"";
 				DEVELOPMENT_TEAM = 4P87YA35TA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Connect 10";
+				INFOPLIST_KEY_CFBundleDisplayName = Squiggles;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -321,7 +321,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.alexanderresnik.Connect;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alexanderresnik.squiggles;
 				PRODUCT_NAME = "$(TARGET_NAME) 10";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -332,7 +332,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		46AEEC5929AD00ED00A5128F /* Build configuration list for PBXProject "Connect" */ = {
+		46AEEC5929AD00ED00A5128F /* Build configuration list for PBXProject "Squiggles" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				46AEEC6A29AD00ED00A5128F /* Debug */,
@@ -341,7 +341,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		46AEEC6C29AD00ED00A5128F /* Build configuration list for PBXNativeTarget "Connect" */ = {
+		46AEEC6C29AD00ED00A5128F /* Build configuration list for PBXNativeTarget "Squiggles" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				46AEEC6D29AD00ED00A5128F /* Debug */,

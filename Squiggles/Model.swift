@@ -1,6 +1,6 @@
 //
 //  Model.swift
-//  ConnecttheDots
+//  Squiggles
 //
 //  Created by Alex Resnik on 2/27/23.
 //
@@ -88,13 +88,17 @@ final class Model: ObservableObject {
         drawDots()
     }
     
-    func move(i: Int) {
+    func start(i: Int) {
         let dot = dots.first { $0.dot == i }
         for j in 0..<lines.count {
-            if lines[j].color == dot?.color ?? .clear {
+            if lines[j].color == dot?.color {
                 k = j
             }
         }
+    }
+    
+    func move(i: Int) {
+        let dot = dots.first { $0.dot == i }
         if isWalkingBack(i: i) {
             lines[k].segment.removeLast()
         }
@@ -104,11 +108,12 @@ final class Model: ObservableObject {
                 return
             }
         }
-        if lines[k].segment.last != nil || dot != nil {
+        if (dot != nil && lines[k].color == dot?.color) || (lines[k].segment.last != nil && dot == nil) {
             lines[k].segment.append(i)
         }
         if hasDuplicateLines(in: lines) {
             lines[k].segment.removeLast()
+            deleteIntersectedLine(i: i)
         }
     }
     
@@ -117,6 +122,29 @@ final class Model: ObservableObject {
             return true
         }
         return false
+    }
+    
+    func deleteLine(i: Int) {
+        for j in 0..<lines.count {
+            if lines[j].segment.contains(i) {
+                lines[j].segment.removeAll()
+            }
+        }
+    }
+    
+    func deleteIntersectedLine(i: Int) {
+        for j in 0..<lines.count {
+            if lines[j].segment.contains(i) {
+                for i in 0..<flows.count {
+                    if (lines[j].segment.first == flows[i].middle.first &&
+                        lines[j].segment.last  == flows[i].middle.last) ||
+                       (lines[j].segment.first == flows[i].middle.last  &&
+                        lines[j].segment.last  == flows[i].middle.first) {
+                        lines[j].segment.removeAll()
+                    }
+                }
+            }
+        }
     }
     
     func isPairConnected() -> Bool {

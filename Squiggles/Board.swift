@@ -1,6 +1,6 @@
 //
 //  Board.swift
-//  ConnecttheDots
+//  Squiggles
 //
 //  Created by Alex Resnik on 2/27/23.
 //
@@ -9,7 +9,6 @@ import SwiftUI
 
 private let screenWidth: CGFloat = UIScreen.main.bounds.size.width
 private let screenHeight: CGFloat = UIScreen.main.bounds.size.height
-private var i: Int = 0
 private var solution: Bool = false
 
 struct Board: View {
@@ -98,31 +97,35 @@ extension Board {
         VStack(spacing: 0.0) {
             Spacer()
             VStack(spacing: 0.0) {
-                ForEach(0..<10) { y in
+                ForEach(0..<10) { h in
                     HStack(spacing: 0.0) {
-                        ForEach(0..<10) { x in
+                        ForEach(0..<10) { w in
                             Rectangle()
                                 .fill(.clear)
                                 .contentShape(Rectangle())
                                 .simultaneousGesture(TapGesture().onEnded({
-                                    let dot = viewModel.dots.first { $0.dot == i }
-                                    if dot?.color ?? .clear != .clear {
-                                        viewModel.lines[viewModel.k].segment.removeAll()
-                                    }
+                                    let j = w + h*10
+                                    viewModel.deleteLine(i: j)
                                 }))
                                 .simultaneousGesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .named("overlay"))
                                     .onChanged { value in
+                                        let j = w + h*10
                                         let x = Int(value.location.x/(screenWidth/10))
                                         let y = Int(value.location.y/(screenWidth/10))
-                                        i = x + y*10
+                                        var i = x + y*10
                                         if i < 0  { i = 0  }
                                         if i > 99 { i = 99 }
-                                        viewModel.move(i: i)
+                                        viewModel.start(i: j)
+                                        if !solution {
+                                            viewModel.move(i: i)
+                                        }
                                     }
                                     .onEnded { _ in
-//                                        if !viewModel.isPairConnected() {
-//                                            viewModel.lines[viewModel.k].segment.removeAll()
-//                                        }
+                                    
+                                        let j = w + h*10
+                                        if !viewModel.isPairConnected() {
+                                            viewModel.deleteLine(i: j)
+                                        }
                                     }
                                 )
                         }
