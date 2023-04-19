@@ -57,14 +57,14 @@ extension Board {
 }
 extension Board {
     private var middle: some View {
-        ForEach(viewModel.flows, id: \.color) { flow in
+        ForEach(viewModel.squiggles, id: \.color) { squiggle in
             Path { path in
-                path.move(to: position(at: flow.middle.first ?? 0))
-                for i in 0..<flow.middle.count {
-                    path.addLine(to: position(at: flow.middle[i]))
+                path.move(to: position(at: squiggle.middle.first ?? 0))
+                for i in 0..<squiggle.middle.count {
+                    path.addLine(to: position(at: squiggle.middle[i]))
                 }
             }
-            .stroke(flow.color, lineWidth: screenWidth/40)
+            .stroke(squiggle.color, lineWidth: screenWidth/40)
             .offset(CGSize(width: screenWidth/20, height: screenWidth/2.44))
         }
     }
@@ -121,10 +121,8 @@ extension Board {
                                         }
                                     }
                                     .onEnded { _ in
-                                    
-                                        let j = w + h*10
                                         if !viewModel.isPairConnected() {
-                                            viewModel.deleteLine(i: j)
+                                            viewModel.lines[viewModel.k].segment.removeAll()
                                         }
                                     }
                                 )

@@ -10,19 +10,19 @@ import SwiftUI
 
 final class Model: ObservableObject {
 
-    // Initial flows
-    @Published var flows: [Flow] = [
-        Flow(color: .red,    middle: [0, 10, 20, 30, 40, 50, 60, 70, 80,
+    // Initial squiggles
+    @Published var squiggles: [Squiggle] = [
+        Squiggle(color: .red,    middle: [0, 10, 20, 30, 40, 50, 60, 70, 80,
                                      90, 91, 92, 93, 94, 95, 96, 97, 98, 99]),
-        Flow(color: .blue,   middle: [1, 11, 21, 31, 41, 51, 61, 71, 81]),
-        Flow(color: .green,  middle: [2, 12, 22, 32, 42, 52, 62, 72, 82]),
-        Flow(color: .orange, middle: [3, 13, 23, 33, 43, 53, 63, 73, 83]),
-        Flow(color: .yellow, middle: [4, 14, 24, 34, 44, 54, 64, 74, 84]),
-        Flow(color: .gray  , middle: [5, 15, 25, 35, 45, 55, 65, 75, 85]),
-        Flow(color: .purple, middle: [6, 16, 26, 36, 46, 56, 66, 76, 86]),
-        Flow(color: .brown,  middle: [7, 17, 27, 37, 47, 57, 67, 77, 87]),
-        Flow(color: .cyan,   middle: [8, 18, 28, 38, 48, 58, 68, 78, 88]),
-        Flow(color: .indigo, middle: [9, 19, 29, 39, 49, 59, 69, 79, 89]) ]
+        Squiggle(color: .blue,   middle: [1, 11, 21, 31, 41, 51, 61, 71, 81]),
+        Squiggle(color: .green,  middle: [2, 12, 22, 32, 42, 52, 62, 72, 82]),
+        Squiggle(color: .orange, middle: [3, 13, 23, 33, 43, 53, 63, 73, 83]),
+        Squiggle(color: .yellow, middle: [4, 14, 24, 34, 44, 54, 64, 74, 84]),
+        Squiggle(color: .gray  , middle: [5, 15, 25, 35, 45, 55, 65, 75, 85]),
+        Squiggle(color: .purple, middle: [6, 16, 26, 36, 46, 56, 66, 76, 86]),
+        Squiggle(color: .brown,  middle: [7, 17, 27, 37, 47, 57, 67, 77, 87]),
+        Squiggle(color: .cyan,   middle: [8, 18, 28, 38, 48, 58, 68, 78, 88]),
+        Squiggle(color: .indigo, middle: [9, 19, 29, 39, 49, 59, 69, 79, 89]) ]
     @Published var lines: [Line] = [
         Line(color: .red,    segment: []),
         Line(color: .blue,   segment: []),
@@ -40,7 +40,7 @@ final class Model: ObservableObject {
     private var color: [Color] = [
         .red, .blue, .green, .orange, .yellow, .gray, .purple, .brown, .cyan, .indigo ].shuffled()
     
-    struct Flow {
+    struct Squiggle {
         var color: Color
         var middle: [Int]
     }
@@ -56,30 +56,30 @@ final class Model: ObservableObject {
     }
     
     func randomizecolors() {
-        for i in 0..<flows.count {
-            flows[i].color = color[i]
+        for i in 0..<squiggles.count {
+            squiggles[i].color = color[i]
         }
     }
     
     func drawDots() {
-        for i in 0..<flows.count {
-            dots.append(Dot(color: color[i], dot: flows[i].middle.first ?? 0))
-            dots.append(Dot(color: color[i], dot: flows[i].middle.last ?? 0))
+        for i in 0..<squiggles.count {
+            dots.append(Dot(color: color[i], dot: squiggles[i].middle.first ?? 0))
+            dots.append(Dot(color: color[i], dot: squiggles[i].middle.last ?? 0))
         }
     }
     
     func randomize() {
         for _ in 0..<100 {
-        let rnd: Int = Int.random(in: 0..<flows.count)
-            for i in 0..<flows.count {
-                if flows[rnd].middle.count > 3 {
-                    if isNeighbor(end1: flows[rnd].middle.first ?? 0, end2: flows[i].middle.first ?? 0) {
-                        flows[i].middle.insert(flows[rnd].middle.first ?? 0, at: 0)
-                        flows[rnd].middle.removeFirst()
+        let rnd: Int = Int.random(in: 0..<squiggles.count)
+            for i in 0..<squiggles.count {
+                if squiggles[rnd].middle.count > 3 {
+                    if isNeighbor(end1: squiggles[rnd].middle.first ?? 0, end2: squiggles[i].middle.first ?? 0) {
+                        squiggles[i].middle.insert(squiggles[rnd].middle.first ?? 0, at: 0)
+                        squiggles[rnd].middle.removeFirst()
                     }
-                    if isNeighbor(end1: flows[rnd].middle.last ?? 9, end2: flows[i].middle.last ?? 9) {
-                        flows[i].middle.append(flows[rnd].middle.last ?? 9)
-                        flows[rnd].middle.removeLast()
+                    if isNeighbor(end1: squiggles[rnd].middle.last ?? 9, end2: squiggles[i].middle.last ?? 9) {
+                        squiggles[i].middle.append(squiggles[rnd].middle.last ?? 9)
+                        squiggles[rnd].middle.removeLast()
                     }
                 }
             }
@@ -135,11 +135,11 @@ final class Model: ObservableObject {
     func deleteIntersectedLine(i: Int) {
         for j in 0..<lines.count {
             if lines[j].segment.contains(i) {
-                for i in 0..<flows.count {
-                    if (lines[j].segment.first == flows[i].middle.first &&
-                        lines[j].segment.last  == flows[i].middle.last) ||
-                       (lines[j].segment.first == flows[i].middle.last  &&
-                        lines[j].segment.last  == flows[i].middle.first) {
+                for i in 0..<squiggles.count {
+                    if (lines[j].segment.first == squiggles[i].middle.first &&
+                        lines[j].segment.last  == squiggles[i].middle.last) ||
+                       (lines[j].segment.first == squiggles[i].middle.last  &&
+                        lines[j].segment.last  == squiggles[i].middle.first) {
                         lines[j].segment.removeAll()
                     }
                 }
@@ -148,11 +148,11 @@ final class Model: ObservableObject {
     }
     
     func isPairConnected() -> Bool {
-        for i in 0..<flows.count {
-            if (lines[k].segment.first == flows[i].middle.first &&
-                lines[k].segment.last  == flows[i].middle.last) ||
-               (lines[k].segment.first == flows[i].middle.last  &&
-                lines[k].segment.last  == flows[i].middle.first) {
+        for i in 0..<squiggles.count {
+            if (lines[k].segment.first == squiggles[i].middle.first &&
+                lines[k].segment.last  == squiggles[i].middle.last) ||
+               (lines[k].segment.first == squiggles[i].middle.last  &&
+                lines[k].segment.last  == squiggles[i].middle.first) {
                 return true
             }
         }
