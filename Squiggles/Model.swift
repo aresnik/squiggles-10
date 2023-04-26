@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import AVFoundation
 
 final class Model: ObservableObject {
 
@@ -36,9 +37,15 @@ final class Model: ObservableObject {
         Line(color: .indigo, segment: []) ]
     @Published var dots: [Dot] = []
     @Published var k: Int = 0
-    private var l: Int = -1
+    @Published var moves: Int = 0
+    @Published var solved: Bool = false
+    @Published var message: String = "SOLVED!"
+    
     private var color: [Color] = [
         .red, .blue, .green, .orange, .yellow, .gray, .purple, .brown, .cyan, .indigo ].shuffled()
+    private var soundPlayer: AVAudioPlayer = AVAudioPlayer()
+    private var isConnected: Bool = false
+    private var defaults: UserDefaults = UserDefaults.standard
     
     struct Squiggle {
         var color: Color
@@ -59,6 +66,17 @@ final class Model: ObservableObject {
         for i in 0..<squiggles.count {
             squiggles[i].color = color[i]
         }
+    }
+    
+    func save() {
+        defaults.set(moves, forKey: "moves")
+        defaults.set(message, forKey: "messege")
+    }
+    
+    func load() {
+        moves = defaults.integer(forKey: "moves")
+        message = defaults.string(forKey: "messege") ?? ""
+
     }
     
     func drawDots() {
@@ -86,6 +104,7 @@ final class Model: ObservableObject {
         }
         randomizecolors()
         drawDots()
+        moves = 0
     }
     
     func start(i: Int) {
@@ -159,6 +178,48 @@ final class Model: ObservableObject {
         return false
     }
     
+    func countMoves() {
+        if !isConnected {
+            if isPairConnected() {
+                isConnected = true
+                moves += 1
+                if moves == 10 {
+                    message = "PERFECT!"
+                } else {
+                    message = "SOLVED!"
+                }
+                save()
+                playSoundMove()
+            }
+        } else if !isPairConnected() {
+            isConnected = false
+        }
+    }
+    
+    func playSoundMove() {
+        do {
+            let url =  Bundle.main.url(forResource: "move", withExtension: "mp3")
+            soundPlayer = try AVAudioPlayer(contentsOf: url!)
+            soundPlayer.volume = 0.2
+            soundPlayer.prepareToPlay()
+            soundPlayer.play()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func playSoundTada() {
+        do {
+            let url =  Bundle.main.url(forResource: "tada", withExtension: "mp3")
+            soundPlayer = try AVAudioPlayer(contentsOf: url!)
+            soundPlayer.volume = 0.01
+            soundPlayer.prepareToPlay()
+            soundPlayer.play()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
     func hasDuplicateLines(in lines: [Line]) -> Bool {
            var set = Set<Int>()
            for line in lines {
@@ -185,6 +246,20 @@ final class Model: ObservableObject {
         !(end1 == 70 && end2 == 69) && !(end2 == 70 && end1 == 69) &&
         !(end1 == 80 && end2 == 79) && !(end2 == 80 && end1 == 79) &&
         !(end1 == 90 && end2 == 89) && !(end2 == 90 && end1 == 89)
+    }
+    
+    func isSolved() {
+        var count: Int = 0
+        for line in lines {
+            for integer in line.segment {
+                if integer >= 0 && integer <= 100 {
+                    count += 1
+                }
+            }
+        }
+        if count == 100 {
+            solved = true
+        }
     }
 }
 

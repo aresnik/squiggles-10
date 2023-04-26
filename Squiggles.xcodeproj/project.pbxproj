@@ -7,20 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		468BAB4C29F7ED9A008724AD /* Start.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468BAB4B29F7ED9A008724AD /* Start.swift */; };
+		468BAB4E29F7F30E008724AD /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468BAB4D29F7F30E008724AD /* Alert.swift */; };
+		468BAB5029F7FDD9008724AD /* move.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 468BAB4F29F7FDD9008724AD /* move.mp3 */; };
 		46AEEC6229AD00ED00A5128F /* SquigglesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AEEC6129AD00ED00A5128F /* SquigglesApp.swift */; };
 		46AEEC6429AD00ED00A5128F /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AEEC6329AD00ED00A5128F /* Board.swift */; };
 		46AEEC6629AD00ED00A5128F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46AEEC6529AD00ED00A5128F /* Assets.xcassets */; };
 		46AEEC6929AD00ED00A5128F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46AEEC6829AD00ED00A5128F /* Preview Assets.xcassets */; };
 		46AEEC7029AD08FF00A5128F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AEEC6F29AD08FF00A5128F /* Model.swift */; };
+		46DBFE3929F9AFE200365270 /* tada.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 46DBFE3829F9AFE200365270 /* tada.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		468BAB4B29F7ED9A008724AD /* Start.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start.swift; sourceTree = "<group>"; };
+		468BAB4D29F7F30E008724AD /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		468BAB4F29F7FDD9008724AD /* move.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = move.mp3; sourceTree = "<group>"; };
 		46AEEC5E29AD00ED00A5128F /* Squiggles 10.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Squiggles 10.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46AEEC6129AD00ED00A5128F /* SquigglesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquigglesApp.swift; sourceTree = "<group>"; };
 		46AEEC6329AD00ED00A5128F /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		46AEEC6529AD00ED00A5128F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		46AEEC6829AD00ED00A5128F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		46AEEC6F29AD08FF00A5128F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		46DBFE3829F9AFE200365270 /* tada.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tada.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,9 +62,13 @@
 			isa = PBXGroup;
 			children = (
 				46AEEC6129AD00ED00A5128F /* SquigglesApp.swift */,
+				468BAB4B29F7ED9A008724AD /* Start.swift */,
 				46AEEC6329AD00ED00A5128F /* Board.swift */,
+				468BAB4D29F7F30E008724AD /* Alert.swift */,
 				46AEEC6F29AD08FF00A5128F /* Model.swift */,
 				46AEEC6529AD00ED00A5128F /* Assets.xcassets */,
+				468BAB4F29F7FDD9008724AD /* move.mp3 */,
+				46DBFE3829F9AFE200365270 /* tada.mp3 */,
 				46AEEC6729AD00ED00A5128F /* Preview Content */,
 			);
 			path = Squiggles;
@@ -128,8 +140,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46DBFE3929F9AFE200365270 /* tada.mp3 in Resources */,
 				46AEEC6929AD00ED00A5128F /* Preview Assets.xcassets in Resources */,
 				46AEEC6629AD00ED00A5128F /* Assets.xcassets in Resources */,
+				468BAB5029F7FDD9008724AD /* move.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,8 +154,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				468BAB4C29F7ED9A008724AD /* Start.swift in Sources */,
 				46AEEC7029AD08FF00A5128F /* Model.swift in Sources */,
 				46AEEC6429AD00ED00A5128F /* Board.swift in Sources */,
+				468BAB4E29F7F30E008724AD /* Alert.swift in Sources */,
 				46AEEC6229AD00ED00A5128F /* SquigglesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

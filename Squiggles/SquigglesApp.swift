@@ -11,7 +11,7 @@ import SwiftUI
 struct SquigglesApp: App {
     var body: some Scene {
         WindowGroup {
-            Board()
+            Start()
         }
     }
 }

@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-private let screenWidth: CGFloat = UIScreen.main.bounds.size.width
-private let screenHeight: CGFloat = UIScreen.main.bounds.size.height
+private let screenWidth: CGFloat = UIScreen.main.bounds.width
 private var solution: Bool = false
 
 struct Board: View {
@@ -17,15 +16,20 @@ struct Board: View {
     
     var body: some View {
         ZStack {
-            Color.black
-                .ignoresSafeArea()
-            grid
-            if solution { middle }
-            drawLine
-            overlay
-            button
+            ZStack {
+                Color.black
+                    .ignoresSafeArea()
+                grid
+                if solution { middle }
+                drawLine
+                overlay
+                button
+            }
+            .onAppear(perform: viewModel.randomize)
+            .allowsHitTesting(!viewModel.solved)
+            .blur(radius: viewModel.solved ? 2 : 0)
+            if viewModel.solved { Alert() }
         }
-        .onAppear(perform: viewModel.randomize)
     }
 }
 
@@ -57,15 +61,18 @@ extension Board {
 }
 extension Board {
     private var middle: some View {
-        ForEach(viewModel.squiggles, id: \.color) { squiggle in
-            Path { path in
-                path.move(to: position(at: squiggle.middle.first ?? 0))
-                for i in 0..<squiggle.middle.count {
-                    path.addLine(to: position(at: squiggle.middle[i]))
+        GeometryReader { geo in
+            ForEach(viewModel.squiggles, id: \.color) { squiggle in
+                Path { path in
+                    path.move(to: position(at: squiggle.middle.first ?? 0))
+                    for i in 0..<squiggle.middle.count {
+                        path.addLine(to: position(at: squiggle.middle[i]))
+                    }
                 }
+                .stroke(squiggle.color, lineWidth: screenWidth/40)
+                .offset(CGSize(width: geo.size.width/20, height: (geo.size.height - geo.size.width)/2 +
+                               geo.size.width/20))
             }
-            .stroke(squiggle.color, lineWidth: screenWidth/40)
-            .offset(CGSize(width: screenWidth/20, height: screenWidth/2.44))
         }
     }
     
@@ -79,15 +86,18 @@ extension Board {
 
 extension Board {
     private var drawLine: some View {
-        ForEach(viewModel.lines, id: \.color) { line in
-            Path { path in
-                path.move(to: position(at: line.segment.first ?? 0))
-                for i in 0..<line.segment.count {
-                    path.addLine(to: position(at: line.segment[i]))
+        GeometryReader { geo in
+            ForEach(viewModel.lines, id: \.color) { line in
+                Path { path in
+                    path.move(to: position(at: line.segment.first ?? 0))
+                    for i in 0..<line.segment.count {
+                        path.addLine(to: position(at: line.segment[i]))
+                    }
                 }
+                .stroke(line.color, lineWidth: screenWidth/40)
+                .offset(CGSize(width: geo.size.width/20, height: (geo.size.height - geo.size.width)/2 +
+                               geo.size.width/20))
             }
-            .stroke(line.color, lineWidth: screenWidth/40)
-            .offset(CGSize(width: screenWidth/20, height: screenWidth/2.44))
         }
     }
 }
@@ -119,11 +129,14 @@ extension Board {
                                         if !solution {
                                             viewModel.move(i: i)
                                         }
+                                        viewModel.countMoves()
                                     }
                                     .onEnded { _ in
                                         if !viewModel.isPairConnected() {
                                             viewModel.lines[viewModel.k].segment.removeAll()
                                         }
+                                        viewModel.isSolved()
+                                       
                                     }
                                 )
                         }
@@ -150,7 +163,7 @@ extension Board {
                     viewModel.randomize()
                     solution = false
                 }, label: {
-                    Text("Play Again")
+                    Text("New Board")
                         .font(.system(size: 20))
                         .foregroundColor(.white)
                         .padding()
@@ -161,10 +174,7 @@ extension Board {
                 })
                 Spacer()
                 Button(action: {
-                    solution = true
-                    for i in 0..<viewModel.lines.count {
-                        viewModel.lines[i].segment.removeAll()
-                    }
+                    solution.toggle()
                     viewModel.drawDots()
                 }, label: {
                     Text("Solution")
@@ -176,7 +186,13 @@ extension Board {
                                 .stroke(Color.white, lineWidth: 2.0)
                         )
                 })
-            }
+            }.padding(.top, 15)
+            HStack {
+                Text("Moves: \(viewModel.moves) for 10")
+                    .foregroundColor(.white)
+                    .font(.system(size: 25))
+                    .frame(width: 200, alignment: .leading)
+            }.padding(.top, 15)
             Spacer()
         }
     }
