@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4664A9E22A0039F50055FC97 /* End.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4664A9E12A0039F50055FC97 /* End.swift */; };
 		468BAB4C29F7ED9A008724AD /* Start.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468BAB4B29F7ED9A008724AD /* Start.swift */; };
 		468BAB4E29F7F30E008724AD /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468BAB4D29F7F30E008724AD /* Alert.swift */; };
 		468BAB5029F7FDD9008724AD /* move.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 468BAB4F29F7FDD9008724AD /* move.mp3 */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4664A9E12A0039F50055FC97 /* End.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = End.swift; sourceTree = "<group>"; };
 		468BAB4B29F7ED9A008724AD /* Start.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start.swift; sourceTree = "<group>"; };
 		468BAB4D29F7F30E008724AD /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		468BAB4F29F7FDD9008724AD /* move.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = move.mp3; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 			children = (
 				46AEEC6129AD00ED00A5128F /* SquigglesApp.swift */,
 				468BAB4B29F7ED9A008724AD /* Start.swift */,
+				4664A9E12A0039F50055FC97 /* End.swift */,
 				46AEEC6329AD00ED00A5128F /* Board.swift */,
 				468BAB4D29F7F30E008724AD /* Alert.swift */,
 				46AEEC6F29AD08FF00A5128F /* Model.swift */,
@@ -157,6 +160,7 @@
 				468BAB4C29F7ED9A008724AD /* Start.swift in Sources */,
 				46AEEC7029AD08FF00A5128F /* Model.swift in Sources */,
 				46AEEC6429AD00ED00A5128F /* Board.swift in Sources */,
+				4664A9E22A0039F50055FC97 /* End.swift in Sources */,
 				468BAB4E29F7F30E008724AD /* Alert.swift in Sources */,
 				46AEEC6229AD00ED00A5128F /* SquigglesApp.swift in Sources */,
 			);

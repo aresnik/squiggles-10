@@ -21,9 +21,10 @@ struct Board: View {
                     .ignoresSafeArea()
                 grid
                 if solution { middle }
-                drawLine
+                if !solution { drawLine }
                 overlay
                 button
+                label
             }
             .onAppear(perform: viewModel.randomize)
             .allowsHitTesting(!viewModel.solved)
@@ -155,29 +156,13 @@ extension Board {
     private var button: some View {
         VStack {
             HStack {
-                Button(action: {
-                    viewModel.dots.removeAll()
-                    for i in 0..<viewModel.lines.count {
-                        viewModel.lines[i].segment.removeAll()
-                    }
-                    viewModel.randomize()
-                    solution = false
-                }, label: {
-                    Text("New Board")
-                        .font(.system(size: 20))
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(
-                            Capsule()
-                                .stroke(Color.white, lineWidth: 2.0)
-                        )
-                })
                 Spacer()
                 Button(action: {
                     solution.toggle()
                     viewModel.drawDots()
                 }, label: {
-                    Text("Solution")
+                if !solution {
+                    Text("Show Solution")
                         .font(.system(size: 20))
                         .foregroundColor(.white)
                         .padding()
@@ -185,18 +170,37 @@ extension Board {
                             Capsule()
                                 .stroke(Color.white, lineWidth: 2.0)
                         )
+                } else {
+                    Text("Hide Solution")
+                        .font(.system(size: 20))
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(
+                            Capsule()
+                                .stroke(Color.white, lineWidth: 2.0)
+                        )
+                }
                 })
-            }.padding(.top, 15)
-            HStack {
-                Text("Moves: \(viewModel.moves) for 10")
-                    .foregroundColor(.white)
-                    .font(.system(size: 25))
-                    .frame(width: 200, alignment: .leading)
             }.padding(.top, 15)
             Spacer()
         }
     }
 }
+
+extension Board {
+    private var label: some View {
+        GeometryReader { geo in
+            HStack {
+                Spacer()
+                Text("Moves: \(viewModel.moves) for 10")
+                    .foregroundColor(.white)
+                    .font(.system(size: 25))
+                Spacer()
+            }.offset(CGSize(width: 0, height: (geo.size.height - geo.size.width)/2 - 35))
+        }
+    }
+}
+
 
 struct Board_Previews: PreviewProvider {
     static var previews: some View {

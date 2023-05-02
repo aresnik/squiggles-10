@@ -14,15 +14,11 @@ struct Alert: View {
 
     var body: some View {
         if isActive {
-           Start()
+           End()
         } else {
             VStack {
                 Text(viewModel.message)
                     .font(.system(size: 25))
-                    .foregroundColor(.white)
-                    .padding()
-                Text("Moves: \(viewModel.moves) for 10")
-                    .font(.system(size: 20))
                     .foregroundColor(.white)
                     .padding()
                 Button("OK") {

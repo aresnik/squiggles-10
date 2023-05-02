@@ -38,6 +38,9 @@ final class Model: ObservableObject {
     @Published var dots: [Dot] = []
     @Published var k: Int = 0
     @Published var moves: Int = 0
+    @Published var perfectGames: Int = 0
+    @Published var perfectStreak: Int = 0
+    @Published var longestStreak: Int = 0
     @Published var solved: Bool = false
     @Published var message: String = "SOLVED!"
     
@@ -69,13 +72,30 @@ final class Model: ObservableObject {
     }
     
     func save() {
+        perfectGames = defaults.integer(forKey: "perfectGames")
+        perfectStreak = defaults.integer(forKey: "perfectStreak")
+        longestStreak = defaults.integer(forKey: "longestStreak")
+        if message == "PERFECT!" {
+            perfectGames += 1
+            perfectStreak += 1
+        } else {
+            perfectStreak = 0
+        }
+        if perfectStreak > longestStreak {
+            defaults.set(perfectStreak, forKey: "longestStreak")
+        }
         defaults.set(moves, forKey: "moves")
-        defaults.set(message, forKey: "messege")
+        defaults.set(perfectGames, forKey: "perfectGames")
+        defaults.set(perfectStreak, forKey: "perfectStreak")
+        defaults.set(message, forKey: "message")
     }
     
     func load() {
         moves = defaults.integer(forKey: "moves")
-        message = defaults.string(forKey: "messege") ?? ""
+        perfectGames = defaults.integer(forKey: "perfectGames")
+        perfectStreak = defaults.integer(forKey: "perfectStreak")
+        longestStreak = defaults.integer(forKey: "longestStreak")
+        message = defaults.string(forKey: "message") ?? ""
 
     }
     
@@ -188,7 +208,6 @@ final class Model: ObservableObject {
                 } else {
                     message = "SOLVED!"
                 }
-                save()
                 playSoundMove()
             }
         } else if !isPairConnected() {
@@ -259,6 +278,7 @@ final class Model: ObservableObject {
         }
         if count == 100 {
             solved = true
+            save()
         }
     }
 }
