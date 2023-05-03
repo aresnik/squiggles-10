@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15F6D73813CB3B1007F0F5A3 /* Pods_Squiggles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32057965AEF16FAD79D2E613 /* Pods_Squiggles.framework */; };
 		4664A9E22A0039F50055FC97 /* End.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4664A9E12A0039F50055FC97 /* End.swift */; };
 		468BAB4C29F7ED9A008724AD /* Start.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468BAB4B29F7ED9A008724AD /* Start.swift */; };
 		468BAB4E29F7F30E008724AD /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468BAB4D29F7F30E008724AD /* Alert.swift */; };
@@ -17,9 +18,12 @@
 		46AEEC6929AD00ED00A5128F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46AEEC6829AD00ED00A5128F /* Preview Assets.xcassets */; };
 		46AEEC7029AD08FF00A5128F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AEEC6F29AD08FF00A5128F /* Model.swift */; };
 		46DBFE3929F9AFE200365270 /* tada.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 46DBFE3829F9AFE200365270 /* tada.mp3 */; };
+		46EEEB2C2A02D8FB00F8AFD6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46EEEB2B2A02D8FB00F8AFD6 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C2768D429AE9870E63621D1 /* Pods-Squiggles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Squiggles.release.xcconfig"; path = "Target Support Files/Pods-Squiggles/Pods-Squiggles.release.xcconfig"; sourceTree = "<group>"; };
+		32057965AEF16FAD79D2E613 /* Pods_Squiggles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Squiggles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4664A9E12A0039F50055FC97 /* End.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = End.swift; sourceTree = "<group>"; };
 		468BAB4B29F7ED9A008724AD /* Start.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start.swift; sourceTree = "<group>"; };
 		468BAB4D29F7F30E008724AD /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -31,6 +35,8 @@
 		46AEEC6829AD00ED00A5128F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		46AEEC6F29AD08FF00A5128F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		46DBFE3829F9AFE200365270 /* tada.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tada.mp3; sourceTree = "<group>"; };
+		46EEEB2B2A02D8FB00F8AFD6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		89EF604CCF576D57BC68226B /* Pods-Squiggles.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Squiggles.debug.xcconfig"; path = "Target Support Files/Pods-Squiggles/Pods-Squiggles.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15F6D73813CB3B1007F0F5A3 /* Pods_Squiggles.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,6 +56,8 @@
 			children = (
 				46AEEC6029AD00ED00A5128F /* Squiggles */,
 				46AEEC5F29AD00ED00A5128F /* Products */,
+				5CC4290A10EDEC538BF86E78 /* Pods */,
+				8163181742AAB0610CB2AB35 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,6 +81,7 @@
 				46AEEC6529AD00ED00A5128F /* Assets.xcassets */,
 				468BAB4F29F7FDD9008724AD /* move.mp3 */,
 				46DBFE3829F9AFE200365270 /* tada.mp3 */,
+				46EEEB2B2A02D8FB00F8AFD6 /* GoogleService-Info.plist */,
 				46AEEC6729AD00ED00A5128F /* Preview Content */,
 			);
 			path = Squiggles;
@@ -85,6 +95,24 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		5CC4290A10EDEC538BF86E78 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				89EF604CCF576D57BC68226B /* Pods-Squiggles.debug.xcconfig */,
+				0C2768D429AE9870E63621D1 /* Pods-Squiggles.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		8163181742AAB0610CB2AB35 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				32057965AEF16FAD79D2E613 /* Pods_Squiggles.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -92,9 +120,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 46AEEC6C29AD00ED00A5128F /* Build configuration list for PBXNativeTarget "Squiggles" */;
 			buildPhases = (
+				B17C09623FD35CE77DB36C80 /* [CP] Check Pods Manifest.lock */,
 				46AEEC5A29AD00ED00A5128F /* Sources */,
 				46AEEC5B29AD00ED00A5128F /* Frameworks */,
 				46AEEC5C29AD00ED00A5128F /* Resources */,
+				B54D91C9AB0A2ADD049470ED /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -145,12 +175,55 @@
 			files = (
 				46DBFE3929F9AFE200365270 /* tada.mp3 in Resources */,
 				46AEEC6929AD00ED00A5128F /* Preview Assets.xcassets in Resources */,
+				46EEEB2C2A02D8FB00F8AFD6 /* GoogleService-Info.plist in Resources */,
 				46AEEC6629AD00ED00A5128F /* Assets.xcassets in Resources */,
 				468BAB5029F7FDD9008724AD /* move.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B17C09623FD35CE77DB36C80 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Squiggles-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B54D91C9AB0A2ADD049470ED /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Squiggles/Pods-Squiggles-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Squiggles/Pods-Squiggles-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Squiggles/Pods-Squiggles-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		46AEEC5A29AD00ED00A5128F /* Sources */ = {
@@ -285,6 +358,7 @@
 		};
 		46AEEC6D29AD00ED00A5128F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89EF604CCF576D57BC68226B /* Pods-Squiggles.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -318,6 +392,7 @@
 		};
 		46AEEC6E29AD00ED00A5128F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C2768D429AE9870E63621D1 /* Pods-Squiggles.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
