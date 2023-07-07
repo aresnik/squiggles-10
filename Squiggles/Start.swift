@@ -2,6 +2,9 @@
 //  Start.swift
 //  Squiggles
 //
+//  Start.swift
+//  Squiggles
+//
 //  Created by Alex Resnik on 4/25/23.
 //
 
@@ -14,7 +17,7 @@ struct Start: View {
     
     var body: some View {
         if isActive {
-            Board6()
+            Select()
         } else {
             Color.black
                 .ignoresSafeArea()

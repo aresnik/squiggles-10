@@ -14,7 +14,7 @@ struct End7: View {
     
     var body: some View {
         if isActive {
-            Board6()
+            Board7()
         } else {
             Color.black
                 .ignoresSafeArea()

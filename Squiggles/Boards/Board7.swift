@@ -13,23 +13,28 @@ private var solution: Bool = false
 struct Board7: View {
     
     @StateObject private var viewModel = Model7()
+    @State var GoToSelect = false
     
     var body: some View {
-        ZStack {
+        if GoToSelect {
+            Select()
+        } else {
             ZStack {
-                Color.black
-                    .ignoresSafeArea()
-                grid
-                if solution { middle }
-                if !solution { drawLine }
-                overlay
-                button
-                label
+                ZStack {
+                    Color.black
+                        .ignoresSafeArea()
+                    grid
+                    if solution { middle }
+                    if !solution { drawLine }
+                    overlay
+                    button
+                    label
+                }
+                .onAppear(perform: viewModel.randomize)
+                .allowsHitTesting(!viewModel.solved)
+                .blur(radius: viewModel.solved ? 2 : 0)
+                if viewModel.solved { Alert7() }
             }
-            .onAppear(perform: viewModel.randomize)
-            .allowsHitTesting(!viewModel.solved)
-            .blur(radius: viewModel.solved ? 2 : 0)
-            if viewModel.solved { Alert7() }
         }
     }
 }
@@ -155,6 +160,18 @@ extension Board7 {
     private var button: some View {
         VStack {
             HStack {
+                Button(action: {
+                    GoToSelect = true
+                }, label: {
+                    Text("Select Board")
+                        .font(.system(size: 20))
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(
+                            Capsule()
+                                .stroke(Color.white, lineWidth: 2.0)
+                        )
+                })
                 Spacer()
                 Button(action: {
                     solution.toggle()
