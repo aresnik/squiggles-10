@@ -1,5 +1,5 @@
 //
-//  End.swift
+//  End7.swift
 //  Squiggles
 //
 //  Created by Alex Resnik on 5/1/23.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct End: View {
+struct End7: View {
     
-    @StateObject private var viewModel = Model()
+    @StateObject private var viewModel = Model7()
     @State var isActive : Bool = false
     
     var body: some View {
         if isActive {
-            Board()
+            Board6()
         } else {
             Color.black
                 .ignoresSafeArea()
@@ -25,7 +25,7 @@ struct End: View {
                         .foregroundColor(.white)
                     Spacer()
                     VStack(alignment: .leading) {
-                        Text("Moves: \(viewModel.moves) for 10")
+                        Text("Moves: \(viewModel.moves) for 7")
                             .foregroundColor(.white)
                             .font(.system(size: 25))
                             .frame(alignment: .leading)
@@ -66,8 +66,8 @@ struct End: View {
     }
 }
 
-struct End_Previews: PreviewProvider {
+struct End7_Previews: PreviewProvider {
     static var previews: some View {
-        End()
+        End7()
     }
 }

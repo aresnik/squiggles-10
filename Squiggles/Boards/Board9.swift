@@ -1,5 +1,5 @@
 //
-//  Board.swift
+//  Board9.swift
 //  Squiggles
 //
 //  Created by Alex Resnik on 2/27/23.
@@ -10,9 +10,9 @@ import SwiftUI
 private let screenWidth: CGFloat = UIScreen.main.bounds.width
 private var solution: Bool = false
 
-struct Board: View {
+struct Board9: View {
     
-    @StateObject private var viewModel = Model()
+    @StateObject private var viewModel = Model9()
     
     var body: some View {
         ZStack {
@@ -29,27 +29,27 @@ struct Board: View {
             .onAppear(perform: viewModel.randomize)
             .allowsHitTesting(!viewModel.solved)
             .blur(radius: viewModel.solved ? 2 : 0)
-            if viewModel.solved { Alert() }
+            if viewModel.solved { Alert9() }
         }
     }
 }
 
-extension Board {
+extension Board9 {
     private var grid: some View {
         VStack(spacing: 0.0) {
             Spacer()
             VStack(spacing: 0.0) {
-                ForEach(0..<10) { y in
+                ForEach(0..<9) { y in
                     HStack(spacing: 0.0) {
-                        ForEach(0..<10) { x in
+                        ForEach(0..<9) { x in
                             ZStack {
                                 Rectangle()
                                     .stroke(.white)
-                                let i = x + y*10
+                                let i = x + y*9
                                 let dot = viewModel.dots.first { $0.dot == i }
                                 Circle()
                                     .fill(dot?.color ?? .clear)
-                                    .frame(width: screenWidth/16)
+                                    .frame(width: screenWidth/14)
                             }
                         }
                     }
@@ -60,7 +60,7 @@ extension Board {
         }
     }
 }
-extension Board {
+extension Board9 {
     private var middle: some View {
         GeometryReader { geo in
             ForEach(viewModel.squiggles, id: \.color) { squiggle in
@@ -70,22 +70,22 @@ extension Board {
                         path.addLine(to: position(at: squiggle.middle[i]))
                     }
                 }
-                .stroke(squiggle.color, lineWidth: screenWidth/40)
-                .offset(CGSize(width: geo.size.width/20, height: (geo.size.height - geo.size.width)/2 +
-                               geo.size.width/20))
+                .stroke(squiggle.color, lineWidth: screenWidth/36)
+                .offset(CGSize(width: geo.size.width/18, height: (geo.size.height - geo.size.width)/2 +
+                               geo.size.width/18))
             }
         }
     }
     
     // Convert index to position
     func position(at index: Int) -> CGPoint {
-        let row = index / 10
-        let col = index % 10
-        return CGPoint(x: CGFloat(col) * screenWidth/10, y: CGFloat(row) * screenWidth/10)
+        let row = index / 9
+        let col = index % 9
+        return CGPoint(x: CGFloat(col) * screenWidth/9, y: CGFloat(row) * screenWidth/9)
     }
 }
 
-extension Board {
+extension Board9 {
     private var drawLine: some View {
         GeometryReader { geo in
             ForEach(viewModel.lines, id: \.color) { line in
@@ -95,37 +95,37 @@ extension Board {
                         path.addLine(to: position(at: line.segment[i]))
                     }
                 }
-                .stroke(line.color, lineWidth: screenWidth/40)
-                .offset(CGSize(width: geo.size.width/20, height: (geo.size.height - geo.size.width)/2 +
-                               geo.size.width/20))
+                .stroke(line.color, lineWidth: screenWidth/36)
+                .offset(CGSize(width: geo.size.width/18, height: (geo.size.height - geo.size.width)/2 +
+                               geo.size.width/18))
             }
         }
     }
 }
 
-extension Board {
+extension Board9 {
     var overlay: some View {
         VStack(spacing: 0.0) {
             Spacer()
             VStack(spacing: 0.0) {
-                ForEach(0..<10) { h in
+                ForEach(0..<9) { h in
                     HStack(spacing: 0.0) {
-                        ForEach(0..<10) { w in
+                        ForEach(0..<9) { w in
                             Rectangle()
                                 .fill(.clear)
                                 .contentShape(Rectangle())
                                 .simultaneousGesture(TapGesture().onEnded({
-                                    let j = w + h*10
+                                    let j = w + h*9
                                     viewModel.deleteLine(i: j)
                                 }))
                                 .simultaneousGesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .named("overlay"))
                                     .onChanged { value in
-                                        let j = w + h*10
-                                        let x = Int(value.location.x/(screenWidth/10))
-                                        let y = Int(value.location.y/(screenWidth/10))
-                                        var i = x + y*10
+                                        let j = w + h*9
+                                        let x = Int(value.location.x/(screenWidth/9))
+                                        let y = Int(value.location.y/(screenWidth/9))
+                                        var i = x + y*9
                                         if i < 0  { i = 0  }
-                                        if i > 99 { i = 99 }
+                                        if i > 80 { i = 80 }
                                         viewModel.start(i: j)
                                         if !solution {
                                             viewModel.move(i: i)
@@ -137,7 +137,6 @@ extension Board {
                                             viewModel.lines[viewModel.k].segment.removeAll()
                                         }
                                         viewModel.isSolved()
-                                       
                                     }
                                 )
                         }
@@ -152,7 +151,7 @@ extension Board {
     }
 }
 
-extension Board {
+extension Board9 {
     private var button: some View {
         VStack {
             HStack {
@@ -187,12 +186,12 @@ extension Board {
     }
 }
 
-extension Board {
+extension Board9 {
     private var label: some View {
         GeometryReader { geo in
             HStack {
                 Spacer()
-                Text("Moves: \(viewModel.moves) for 10")
+                Text("Moves: \(viewModel.moves) for 9")
                     .foregroundColor(.white)
                     .font(.system(size: 25))
                 Spacer()
@@ -202,8 +201,8 @@ extension Board {
 }
 
 
-struct Board_Previews: PreviewProvider {
+struct Board9_Previews: PreviewProvider {
     static var previews: some View {
-        Board()
+        Board9()
     }
 }

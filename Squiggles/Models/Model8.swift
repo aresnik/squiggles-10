@@ -1,29 +1,26 @@
 //
-//  Model.swift
+//  Model8.swift
 //  Squiggles
 //
 //  Created by Alex Resnik on 2/27/23.
 //
 
-import Foundation
 import SwiftUI
-import AVFoundation
+import AVFAudio
 
-final class Model: ObservableObject {
+final class Model8: ObservableObject {
 
     // Initial squiggles
     @Published var squiggles: [Squiggle] = [
-        Squiggle(color: .red,    middle: [0, 10, 20, 30, 40, 50, 60, 70, 80,
-                                     90, 91, 92, 93, 94, 95, 96, 97, 98, 99]),
-        Squiggle(color: .blue,   middle: [1, 11, 21, 31, 41, 51, 61, 71, 81]),
-        Squiggle(color: .green,  middle: [2, 12, 22, 32, 42, 52, 62, 72, 82]),
-        Squiggle(color: .orange, middle: [3, 13, 23, 33, 43, 53, 63, 73, 83]),
-        Squiggle(color: .yellow, middle: [4, 14, 24, 34, 44, 54, 64, 74, 84]),
-        Squiggle(color: .gray  , middle: [5, 15, 25, 35, 45, 55, 65, 75, 85]),
-        Squiggle(color: .purple, middle: [6, 16, 26, 36, 46, 56, 66, 76, 86]),
-        Squiggle(color: .brown,  middle: [7, 17, 27, 37, 47, 57, 67, 77, 87]),
-        Squiggle(color: .cyan,   middle: [8, 18, 28, 38, 48, 58, 68, 78, 88]),
-        Squiggle(color: .indigo, middle: [9, 19, 29, 39, 49, 59, 69, 79, 89]) ]
+        Squiggle(color: .red,    middle: [0,  8, 16, 24, 32, 40, 48,
+                                     56, 57, 58, 59, 60, 61, 62, 63]),
+        Squiggle(color: .blue,   middle: [1,  9, 17, 25, 33, 41, 49]),
+        Squiggle(color: .green,  middle: [2, 10, 18, 26, 34, 42, 50]),
+        Squiggle(color: .orange, middle: [3, 11, 19, 27, 35, 43, 51]),
+        Squiggle(color: .yellow, middle: [4, 12, 20, 28, 36, 44, 52]),
+        Squiggle(color: .gray  , middle: [5, 13, 21, 29, 37, 45, 53]),
+        Squiggle(color: .purple, middle: [6, 14, 22, 30, 38, 46, 54]),
+        Squiggle(color: .brown,  middle: [7, 15, 23, 31, 39, 47, 55]) ]
     @Published var lines: [Line] = [
         Line(color: .red,    segment: []),
         Line(color: .blue,   segment: []),
@@ -32,9 +29,7 @@ final class Model: ObservableObject {
         Line(color: .yellow, segment: []),
         Line(color: .gray  , segment: []),
         Line(color: .purple, segment: []),
-        Line(color: .brown,  segment: []),
-        Line(color: .cyan,   segment: []),
-        Line(color: .indigo, segment: []) ]
+        Line(color: .brown,  segment: []) ]
     @Published var dots: [Dot] = []
     @Published var k: Int = 0
     @Published var moves: Int = 0
@@ -45,7 +40,7 @@ final class Model: ObservableObject {
     @Published var message: String = "SOLVED!"
     
     private var color: [Color] = [
-        .red, .blue, .green, .orange, .yellow, .gray, .purple, .brown, .cyan, .indigo ].shuffled()
+        .red, .blue, .green, .orange, .yellow, .gray, .purple, .brown ].shuffled()
     private var soundPlayer: AVAudioPlayer = AVAudioPlayer()
     private var isConnected: Bool = false
     private var defaults: UserDefaults = UserDefaults.standard
@@ -72,9 +67,9 @@ final class Model: ObservableObject {
     }
     
     func save() {
-        perfectGames = defaults.integer(forKey: "perfectGames")
-        perfectStreak = defaults.integer(forKey: "perfectStreak")
-        longestStreak = defaults.integer(forKey: "longestStreak")
+        perfectGames = defaults.integer(forKey: "perfectGames8")
+        perfectStreak = defaults.integer(forKey: "perfectStreak8")
+        longestStreak = defaults.integer(forKey: "longestStreak8")
         if message == "PERFECT!" {
             perfectGames += 1
             perfectStreak += 1
@@ -82,20 +77,20 @@ final class Model: ObservableObject {
             perfectStreak = 0
         }
         if perfectStreak > longestStreak {
-            defaults.set(perfectStreak, forKey: "longestStreak")
+            defaults.set(perfectStreak, forKey: "longestStreak8")
         }
-        defaults.set(moves, forKey: "moves")
-        defaults.set(perfectGames, forKey: "perfectGames")
-        defaults.set(perfectStreak, forKey: "perfectStreak")
-        defaults.set(message, forKey: "message")
+        defaults.set(moves, forKey: "moves8")
+        defaults.set(perfectGames, forKey: "perfectGames8")
+        defaults.set(perfectStreak, forKey: "perfectStreak8")
+        defaults.set(message, forKey: "message8")
     }
     
     func load() {
-        moves = defaults.integer(forKey: "moves")
-        perfectGames = defaults.integer(forKey: "perfectGames")
-        perfectStreak = defaults.integer(forKey: "perfectStreak")
-        longestStreak = defaults.integer(forKey: "longestStreak")
-        message = defaults.string(forKey: "message") ?? ""
+        moves = defaults.integer(forKey: "moves8")
+        perfectGames = defaults.integer(forKey: "perfectGames8")
+        perfectStreak = defaults.integer(forKey: "perfectStreak8")
+        longestStreak = defaults.integer(forKey: "longestStreak8")
+        message = defaults.string(forKey: "message8") ?? ""
 
     }
     
@@ -203,12 +198,14 @@ final class Model: ObservableObject {
             if isPairConnected() {
                 isConnected = true
                 moves += 1
-                if moves == 10 {
+                if moves == 8 {
                     message = "PERFECT!"
                 } else {
                     message = "SOLVED!"
                 }
                 playSoundMove()
+                let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
+                impactHeavy.impactOccurred()
             }
         } else if !isPairConnected() {
             isConnected = false
@@ -254,29 +251,27 @@ final class Model: ObservableObject {
        }
     
     func isNeighbor(end1: Int, end2: Int) -> Bool {
-        return ( abs(end1 - end2) == 1 || abs(end1 - end2) == 10 ) &&
-        !(end1 == 0  && end2 == 19) && !(end2 ==  0 && end1 == 19) &&
-        !(end1 == 10 && end2 ==  9) && !(end2 == 10 && end1 ==  9) &&
-        !(end1 == 20 && end2 == 19) && !(end2 == 20 && end1 == 19) &&
-        !(end1 == 30 && end2 == 29) && !(end2 == 30 && end1 == 29) &&
+        return ( abs(end1 - end2) == 1 || abs(end1 - end2) == 8 ) &&
+        !(end1 == 0  && end2 == 15) && !(end2 ==  0 && end1 == 15) &&
+        !(end1 == 8  && end2 ==  7) && !(end2 ==  8 && end1 ==  7) &&
+        !(end1 == 16 && end2 == 15) && !(end2 == 16 && end1 == 15) &&
+        !(end1 == 24 && end2 == 23) && !(end2 == 24 && end1 == 23) &&
+        !(end1 == 32 && end2 == 31) && !(end2 == 32 && end1 == 31) &&
         !(end1 == 40 && end2 == 39) && !(end2 == 40 && end1 == 39) &&
-        !(end1 == 50 && end2 == 49) && !(end2 == 50 && end1 == 49) &&
-        !(end1 == 60 && end2 == 59) && !(end2 == 60 && end1 == 59) &&
-        !(end1 == 70 && end2 == 69) && !(end2 == 70 && end1 == 69) &&
-        !(end1 == 80 && end2 == 79) && !(end2 == 80 && end1 == 79) &&
-        !(end1 == 90 && end2 == 89) && !(end2 == 90 && end1 == 89)
+        !(end1 == 48 && end2 == 47) && !(end2 == 48 && end1 == 47) &&
+        !(end1 == 56 && end2 == 55) && !(end2 == 56 && end1 == 55)
     }
     
     func isSolved() {
         var count: Int = 0
         for line in lines {
             for integer in line.segment {
-                if integer >= 0 && integer <= 100 {
+                if integer >= 0 && integer <= 64 {
                     count += 1
                 }
             }
         }
-        if count == 100 {
+        if count == 64 {
             solved = true
             save()
         }

@@ -1,5 +1,5 @@
 //
-//  Alert.swift
+//  Alert8.swift
 //  Squiggles
 //
 //  Created by Alex Resnik on 4/25/23.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct Alert: View {
+struct Alert8: View {
     
-    @StateObject private var viewModel = Model()
+    @StateObject private var viewModel = Model8()
     @State var isActive: Bool = false
 
     var body: some View {
         if isActive {
-           End()
+           End8()
         } else {
             VStack {
                 Text(viewModel.message)
@@ -43,9 +43,9 @@ struct Alert: View {
     }
 }
 
-struct CustomAlert_Previews: PreviewProvider {
+struct CustomAlert8_Previews: PreviewProvider {
     static var previews: some View {
-        Alert()
+        Alert8()
     }
 }
 
