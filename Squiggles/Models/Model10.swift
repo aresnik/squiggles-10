@@ -137,7 +137,7 @@ final class Model10: ObservableObject {
     
     func move(i: Int) {
         let dot = dots.first { $0.dot == i }
-        if isWalkingBack(i: i) {
+        if isWalkingBack(i: i) && !isConnected {
             lines[k].segment.removeLast()
         }
         if isPairConnected() { return }
@@ -151,7 +151,7 @@ final class Model10: ObservableObject {
         }
         if hasDuplicateLines(in: lines) {
             lines[k].segment.removeLast()
-            deleteIntersectedLine(i: i)
+//            deleteIntersectedLine(i: i)
         }
     }
     

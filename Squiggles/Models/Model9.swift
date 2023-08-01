@@ -135,7 +135,7 @@ final class Model9: ObservableObject {
     
     func move(i: Int) {
         let dot = dots.first { $0.dot == i }
-        if isWalkingBack(i: i) {
+        if isWalkingBack(i: i) && !isConnected  {
             lines[k].segment.removeLast()
         }
         if isPairConnected() { return }
@@ -149,7 +149,7 @@ final class Model9: ObservableObject {
         }
         if hasDuplicateLines(in: lines) {
             lines[k].segment.removeLast()
-            deleteIntersectedLine(i: i)
+//            deleteIntersectedLine(i: i)
         }
     }
     
@@ -256,7 +256,7 @@ final class Model9: ObservableObject {
         return ( abs(end1 - end2) == 1 || abs(end1 - end2) == 9 ) &&
         !(end1 == 0  && end2 == 17) && !(end2 ==  0 && end1 == 17) &&
         !(end1 == 9  && end2 ==  8) && !(end2 ==  9 && end1 ==  8) &&
-        !(end1 == 18 && end2 == 17) && !(end2 == 18 && end1 == 19) &&
+        !(end1 == 18 && end2 == 17) && !(end2 == 18 && end1 == 17) &&
         !(end1 == 27 && end2 == 26) && !(end2 == 27 && end1 == 26) &&
         !(end1 == 36 && end2 == 35) && !(end2 == 36 && end1 == 35) &&
         !(end1 == 45 && end2 == 44) && !(end2 == 45 && end1 == 44) &&
