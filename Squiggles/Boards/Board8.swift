@@ -14,6 +14,7 @@ struct Board8: View {
     
     @StateObject private var viewModel = Model8()
     @State var GoToSelect = false
+    private var idiom: UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
     
     var body: some View {
         if GoToSelect {
@@ -27,8 +28,10 @@ struct Board8: View {
                     if solution { middle }
                     if !solution { drawLine }
                     overlay
-                    button
-                    label
+                    if idiom == .phone { buttonIphone }
+                    if idiom == .pad { buttonIpad }
+                    if idiom == .phone { labelIphone }
+                    if idiom == .pad { labelIpad }
                 }
                 .onAppear(perform: viewModel.randomize)
                 .allowsHitTesting(!viewModel.solved)
@@ -157,7 +160,7 @@ extension Board8 {
 }
 
 extension Board8 {
-    private var button: some View {
+    private var buttonIphone: some View {
         VStack {
             HStack {
                 Button(action: {
@@ -204,7 +207,54 @@ extension Board8 {
 }
 
 extension Board8 {
-    private var label: some View {
+    private var buttonIpad: some View {
+        VStack {
+            HStack {
+                Button(action: {
+                    GoToSelect = true
+                }, label: {
+                    Text("Select Board")
+                        .font(.system(size: 35))
+                        .foregroundColor(.white)
+                        .padding(25)
+                        .background(
+                            Capsule()
+                                .stroke(Color.white, lineWidth: 4.0)
+                        )
+                })
+                Spacer()
+                Button(action: {
+                    solution.toggle()
+                    viewModel.drawDots()
+                }, label: {
+                if !solution {
+                    Text("Show Solution")
+                        .font(.system(size: 35))
+                        .foregroundColor(.white)
+                        .padding(25)
+                        .background(
+                            Capsule()
+                                .stroke(Color.white, lineWidth: 4.0)
+                        )
+                } else {
+                    Text("Hide Solution")
+                        .font(.system(size: 35))
+                        .foregroundColor(.white)
+                        .padding(25)
+                        .background(
+                            Capsule()
+                                .stroke(Color.white, lineWidth: 4.0)
+                        )
+                }
+                })
+            }.padding(.top, 15)
+            Spacer()
+        }
+    }
+}
+
+extension Board8 {
+    private var labelIphone: some View {
         GeometryReader { geo in
             HStack {
                 Spacer()
@@ -217,6 +267,19 @@ extension Board8 {
     }
 }
 
+extension Board8 {
+    private var labelIpad: some View {
+        GeometryReader { geo in
+            HStack {
+                Spacer()
+                Text("Moves: \(viewModel.moves) for 8")
+                    .foregroundColor(.white)
+                    .font(.system(size: 35))
+                Spacer()
+            }.offset(CGSize(width: 0, height: (geo.size.height - geo.size.width)/2 - 40))
+        }
+    }
+}
 
 struct Board8_Previews: PreviewProvider {
     static var previews: some View {

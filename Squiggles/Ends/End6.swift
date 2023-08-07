@@ -11,6 +11,7 @@ struct End6: View {
     
     @StateObject private var viewModel = Model6()
     @State var isActive : Bool = false
+    private var idiom: UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
     
     var body: some View {
         if isActive {
@@ -19,50 +20,106 @@ struct End6: View {
             Color.black
                 .ignoresSafeArea()
                 .overlay(
-                VStack {
-                    Text("Game Over")
-                        .font(.system(size: 50))
-                        .foregroundColor(.white)
-                    Spacer()
-                    VStack(alignment: .leading) {
-                        Text("Moves: \(viewModel.moves) for 6")
-                            .foregroundColor(.white)
-                            .font(.system(size: 25))
-                            .frame(alignment: .leading)
-                            .padding()
-                        Text("Perfect Games: \(viewModel.perfectGames)")
-                            .foregroundColor(.white)
-                            .font(.system(size: 25))
-                            .frame(alignment: .leading)
-                            .padding()
-                        Text("Perfect Streak: \(viewModel.perfectStreak)")
-                            .foregroundColor(.white)
-                            .font(.system(size: 25))
-                            .frame(alignment: .leading)
-                            .padding()
-                        Text("Longest Streak: \(viewModel.longestStreak)")
-                            .foregroundColor(.white)
-                            .font(.system(size: 25))
-                            .frame(alignment: .leading)
-                            .padding()
+                    VStack {
+                        if idiom == .phone { endIphone }
+                        if idiom == .pad { endIpad }
                     }
-                    Spacer()
-                    Button(action: {
-                        isActive = true
-                    }, label: {
-                        Text("Play Again")
-                            .font(.system(size: 20))
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(
-                                Capsule()
-                                .stroke(Color.white, lineWidth: 2.0)
-                            )
-                    })
-                    Spacer()
-                } .onAppear(perform: viewModel.load)
             )
         }
+    }
+}
+
+extension End6 {
+    private var endIphone: some View {
+        VStack {
+            Text("Game Over")
+                .font(.system(size: 50))
+                .foregroundColor(.white)
+            Spacer()
+            VStack(alignment: .leading) {
+                Text("Moves: \(viewModel.moves) for 6")
+                    .foregroundColor(.white)
+                    .font(.system(size: 25))
+                    .frame(alignment: .leading)
+                    .padding()
+                Text("Perfect Games: \(viewModel.perfectGames)")
+                    .foregroundColor(.white)
+                    .font(.system(size: 25))
+                    .frame(alignment: .leading)
+                    .padding()
+                Text("Perfect Streak: \(viewModel.perfectStreak)")
+                    .foregroundColor(.white)
+                    .font(.system(size: 25))
+                    .frame(alignment: .leading)
+                    .padding()
+                Text("Longest Streak: \(viewModel.longestStreak)")
+                    .foregroundColor(.white)
+                    .font(.system(size: 25))
+                    .frame(alignment: .leading)
+                    .padding()
+            }
+            Spacer()
+            Button(action: {
+                isActive = true
+            }, label: {
+                Text("Play Again")
+                    .font(.system(size: 20))
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(
+                        Capsule()
+                        .stroke(Color.white, lineWidth: 2.0)
+                    )
+            })
+            Spacer()
+        } .onAppear(perform: viewModel.load)
+    }
+}
+
+extension End6 {
+    private var endIpad: some View {
+        VStack {
+            Text("Game Over")
+                .font(.system(size: 100))
+                .foregroundColor(.white)
+            Spacer()
+            VStack(alignment: .leading) {
+                Text("Moves: \(viewModel.moves) for 6")
+                    .foregroundColor(.white)
+                    .font(.system(size: 50))
+                    .frame(alignment: .leading)
+                    .padding()
+                Text("Perfect Games: \(viewModel.perfectGames)")
+                    .foregroundColor(.white)
+                    .font(.system(size: 50))
+                    .frame(alignment: .leading)
+                    .padding()
+                Text("Perfect Streak: \(viewModel.perfectStreak)")
+                    .foregroundColor(.white)
+                    .font(.system(size: 50))
+                    .frame(alignment: .leading)
+                    .padding()
+                Text("Longest Streak: \(viewModel.longestStreak)")
+                    .foregroundColor(.white)
+                    .font(.system(size: 50))
+                    .frame(alignment: .leading)
+                    .padding()
+            }
+            Spacer()
+            Button(action: {
+                isActive = true
+            }, label: {
+                Text("Play Again")
+                    .font(.system(size: 40))
+                    .foregroundColor(.white)
+                    .padding(25)
+                    .background(
+                        Capsule()
+                        .stroke(Color.white, lineWidth: 4.0)
+                    )
+            })
+            Spacer()
+        } .onAppear(perform: viewModel.load)
     }
 }
 
