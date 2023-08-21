@@ -15,7 +15,7 @@ struct Alert8: View {
 
     var body: some View {
         if isActive {
-           End7()
+           End8()
         } else {
             VStack {
                 if idiom == .phone { alertIphone }
@@ -68,7 +68,7 @@ extension Alert8 {
             .foregroundColor(.white)
             .padding(25)
             .overlay(
-                RoundedRectangle(cornerRadius: 35)
+                RoundedRectangle(cornerRadius: 45)
                     .stroke(.white, lineWidth: 4)
             )
         }

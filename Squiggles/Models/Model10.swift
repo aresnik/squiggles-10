@@ -36,6 +36,9 @@ final class Model10: ObservableObject {
         Line(color: .indigo, segment: []) ]
     @Published var dots: [Dot] = []
     @Published var k: Int = 0
+    @Published var timeCurrent: String = ""
+    @Published var timeBest: String = ""
+    @Published var time: String = "00:00"
     @Published var moves: Int = 0
     @Published var perfectGames: Int = 0
     @Published var perfectStreak: Int = 0
@@ -47,6 +50,10 @@ final class Model10: ObservableObject {
         .red, .blue, .green, .orange, .yellow, .gray, .purple, .brown, .cyan, .indigo ].shuffled()
     private var soundPlayer: AVAudioPlayer = AVAudioPlayer()
     private var isConnected: Bool = false
+    private var lastDotColor: Color = .clear
+    private var timer: Timer = Timer()
+    private var elapsed: Int = 0
+    private var elapsedBest: Int = 0
     private var defaults: UserDefaults = UserDefaults.standard
     
     struct Squiggle {
@@ -83,10 +90,18 @@ final class Model10: ObservableObject {
         if perfectStreak > longestStreak {
             defaults.set(perfectStreak, forKey: "longestStreak10")
         }
+        elapsedBest = defaults.integer(forKey: "elapsedBest10")
+        if elapsedBest == 0 {
+            elapsedBest = elapsed
+        }
+        if elapsed <= elapsedBest {
+            defaults.set(elapsed, forKey: "elapsedBest10")
+        }
         defaults.set(moves, forKey: "moves10")
         defaults.set(perfectGames, forKey: "perfectGames10")
         defaults.set(perfectStreak, forKey: "perfectStreak10")
         defaults.set(message, forKey: "message10")
+        defaults.set(time, forKey: "timeCurrent10")
     }
     
     func load() {
@@ -95,7 +110,9 @@ final class Model10: ObservableObject {
         perfectStreak = defaults.integer(forKey: "perfectStreak10")
         longestStreak = defaults.integer(forKey: "longestStreak10")
         message = defaults.string(forKey: "message10") ?? ""
-
+        timeCurrent = defaults.string(forKey: "timeCurrent10") ?? ""
+        elapsedBest = defaults.integer(forKey: "elapsedBest10")
+        timeBest = createTimeString(seconds: elapsedBest)
     }
     
     func drawDots() {
@@ -124,6 +141,7 @@ final class Model10: ObservableObject {
         randomizecolors()
         drawDots()
         moves = 0
+        elapsedTime()
     }
     
     func start(i: Int) {
@@ -133,6 +151,28 @@ final class Model10: ObservableObject {
                 k = j
             }
         }
+    }
+    
+    func elapsedTime() {
+        elapsed = 0
+        time = "00:00"
+        timer.invalidate()
+        if !timer.isValid {
+            timer.fire()
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] timer in
+                elapsed += 1
+                time = createTimeString(seconds: elapsed)
+            }
+        } else {
+            timer.invalidate()
+        }
+    }
+    
+    func createTimeString(seconds: Int) -> String {
+        let m: Int = (seconds/60) % 60
+        let s: Int = seconds % 60
+        let a = String(format: "%02u:%02u", m, s)
+        return a
     }
     
     func move(i: Int) {
@@ -197,11 +237,15 @@ final class Model10: ObservableObject {
         return false
     }
     
-    func countMoves() {
+    func countMoves(i: Int) {
         if !isConnected {
             if isPairConnected() {
                 isConnected = true
-                moves += 1
+                let dot = dots.first { $0.dot == i }
+                if dot?.color != lastDotColor {
+                    moves += 1
+                    lastDotColor = dot?.color ?? .clear
+                }
                 if moves == 10 {
                     message = "PERFECT!"
                 } else {
@@ -220,7 +264,7 @@ final class Model10: ObservableObject {
         do {
             let url =  Bundle.main.url(forResource: "move", withExtension: "mp3")
             soundPlayer = try AVAudioPlayer(contentsOf: url!)
-            soundPlayer.volume = 0.2
+            soundPlayer.volume = 1.0
             soundPlayer.prepareToPlay()
             soundPlayer.play()
         } catch let error {
@@ -232,7 +276,7 @@ final class Model10: ObservableObject {
         do {
             let url =  Bundle.main.url(forResource: "tada", withExtension: "mp3")
             soundPlayer = try AVAudioPlayer(contentsOf: url!)
-            soundPlayer.volume = 0.01
+            soundPlayer.volume = 1.0
             soundPlayer.prepareToPlay()
             soundPlayer.play()
         } catch let error {
@@ -280,6 +324,7 @@ final class Model10: ObservableObject {
         if count == 100 {
             solved = true
             save()
+            timer.invalidate()
         }
     }
 }

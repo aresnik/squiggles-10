@@ -68,7 +68,7 @@ extension Alert6 {
             .foregroundColor(.white)
             .padding(25)
             .overlay(
-                RoundedRectangle(cornerRadius: 35)
+                RoundedRectangle(cornerRadius: 45)
                     .stroke(.white, lineWidth: 4)
             )
         }

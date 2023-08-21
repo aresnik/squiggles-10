@@ -138,7 +138,7 @@ extension Board8 {
                                         if !solution {
                                             viewModel.move(i: i)
                                         }
-                                        viewModel.countMoves()
+                                        viewModel.countMoves(i: i)
                                     }
                                     .onEnded { _ in
                                         if !viewModel.isPairConnected() {
@@ -258,6 +258,11 @@ extension Board8 {
         GeometryReader { geo in
             HStack {
                 Spacer()
+                Text("Time: \(viewModel.time)")
+                    .foregroundColor(.white)
+                    .font(.system(size: 25))
+                    .frame(width: 170, alignment: .leading)
+                Spacer()
                 Text("Moves: \(viewModel.moves) for 8")
                     .foregroundColor(.white)
                     .font(.system(size: 25))
@@ -271,6 +276,11 @@ extension Board8 {
     private var labelIpad: some View {
         GeometryReader { geo in
             HStack {
+                Spacer()
+                Text("Time: \(viewModel.time)")
+                    .foregroundColor(.white)
+                    .font(.system(size: 35))
+                    .frame(width: 340, alignment: .leading)
                 Spacer()
                 Text("Moves: \(viewModel.moves) for 8")
                     .foregroundColor(.white)

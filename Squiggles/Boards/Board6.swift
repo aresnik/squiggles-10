@@ -138,7 +138,7 @@ extension Board6 {
                                         if !solution {
                                             viewModel.move(i: i)
                                         }
-                                        viewModel.countMoves()
+                                        viewModel.countMoves(i: i)
                                     }
                                     .onEnded { _ in
                                         if !viewModel.isPairConnected() {
@@ -258,9 +258,15 @@ extension Board6 {
         GeometryReader { geo in
             HStack {
                 Spacer()
+                Text("Time: \(viewModel.time)")
+                    .foregroundColor(.white)
+                    .font(.system(size: 25))
+                    .frame(width: 170, alignment: .leading)
+                Spacer()
                 Text("Moves: \(viewModel.moves) for 6")
                     .foregroundColor(.white)
                     .font(.system(size: 25))
+                    .frame(width: 170, alignment: .leading)
                 Spacer()
             }.offset(CGSize(width: 0, height: (geo.size.height - geo.size.width)/2 - 35))
         }
@@ -272,9 +278,15 @@ extension Board6 {
         GeometryReader { geo in
             HStack {
                 Spacer()
+                Text("Time: \(viewModel.time)")
+                    .foregroundColor(.white)
+                    .font(.system(size: 35))
+                    .frame(width: 340, alignment: .leading)
+                Spacer()
                 Text("Moves: \(viewModel.moves) for 6")
                     .foregroundColor(.white)
                     .font(.system(size: 35))
+                    .frame(width: 340, alignment: .leading)
                 Spacer()
             }.offset(CGSize(width: 0, height: (geo.size.height - geo.size.width)/2 - 40))
         }

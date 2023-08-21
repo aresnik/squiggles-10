@@ -15,7 +15,7 @@ struct End7: View {
     
     var body: some View {
         if isActive {
-            Board6()
+            Board7()
         } else {
             Color.black
                 .ignoresSafeArea()
@@ -37,7 +37,17 @@ extension End7 {
                 .foregroundColor(.white)
             Spacer()
             VStack(alignment: .leading) {
+                Text("Time: \(viewModel.timeCurrent)")
+                    .foregroundColor(.white)
+                    .font(.system(size: 25))
+                    .frame(alignment: .leading)
+                    .padding()
                 Text("Moves: \(viewModel.moves) for 7")
+                    .foregroundColor(.white)
+                    .font(.system(size: 25))
+                    .frame(alignment: .leading)
+                    .padding()
+                Text("Best Time: \(viewModel.timeBest)")
                     .foregroundColor(.white)
                     .font(.system(size: 25))
                     .frame(alignment: .leading)
@@ -84,7 +94,17 @@ extension End7 {
                 .foregroundColor(.white)
             Spacer()
             VStack(alignment: .leading) {
+                Text("Time: \(viewModel.timeCurrent)")
+                    .foregroundColor(.white)
+                    .font(.system(size: 50))
+                    .frame(alignment: .leading)
+                    .padding()
                 Text("Moves: \(viewModel.moves) for 7")
+                    .foregroundColor(.white)
+                    .font(.system(size: 50))
+                    .frame(alignment: .leading)
+                    .padding()
+                Text("Best Time: \(viewModel.timeBest)")
                     .foregroundColor(.white)
                     .font(.system(size: 50))
                     .frame(alignment: .leading)
