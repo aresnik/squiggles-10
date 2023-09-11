@@ -13,7 +13,9 @@ private var solution: Bool = false
 struct Board6: View {
     
     @StateObject private var viewModel = Model6()
-    @State var GoToSelect = false
+    @State private var GoToSelect = false
+    @State private var animate = false
+    @State private var color: Color = .clear
     private var idiom: UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
     
     var body: some View {
@@ -57,7 +59,7 @@ extension Board6 {
                                 let dot = viewModel.dots.first { $0.dot == i }
                                 Circle()
                                     .fill(dot?.color ?? .clear)
-                                    .frame(width: screenWidth/8)
+                                    .frame(width: animate && color == dot?.color ? screenWidth/7 : screenWidth/8)
                             }
                         }
                     }
@@ -119,34 +121,46 @@ extension Board6 {
                 ForEach(0..<6) { h in
                     HStack(spacing: 0.0) {
                         ForEach(0..<6) { w in
-                            Rectangle()
-                                .fill(.clear)
-                                .contentShape(Rectangle())
-                                .simultaneousGesture(TapGesture().onEnded({
-                                    let j = w + h*6
-                                    viewModel.deleteLine(i: j)
-                                }))
-                                .simultaneousGesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .named("overlay"))
-                                    .onChanged { value in
+                            ZStack {
+                                Rectangle()
+                                    .fill(.clear)
+                                    .contentShape(Rectangle())
+                                    .simultaneousGesture(TapGesture().onEnded({
                                         let j = w + h*6
-                                        let x = Int(value.location.x/(screenWidth/6))
-                                        let y = Int(value.location.y/(screenWidth/6))
-                                        var i = x + y*6
-                                        if i < 0  { i = 0  }
-                                        if i > 35 { i = 35 }
-                                        viewModel.start(i: j)
-                                        if !solution {
-                                            viewModel.move(i: i)
+                                        viewModel.deleteLine(i: j)
+                                        
+                                    }))
+                                    .simultaneousGesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .named("overlay"))
+                                        .onChanged { value in
+                                            let j = w + h*6
+                                            let x = Int(value.location.x/(screenWidth/6))
+                                            let y = Int(value.location.y/(screenWidth/6))
+                                            var i = x + y*6
+                                            if i < 0  { i = 0  }
+                                            if i > 35 { i = 35 }
+                                            viewModel.start(i: j)
+                                            if !solution {
+                                                viewModel.move(i: i)
+                                            }
+                                            viewModel.countMoves(i: i)
                                         }
-                                        viewModel.countMoves(i: i)
-                                    }
-                                    .onEnded { _ in
-                                        if !viewModel.isPairConnected() {
-                                            viewModel.lines[viewModel.k].segment.removeAll()
+                                        .onEnded { _ in
+                                            if !viewModel.isPairConnected() {
+                                                viewModel.lines[viewModel.k].segment.removeAll()
+                                            }
+                                            viewModel.isSolved()
                                         }
-                                        viewModel.isSolved()
-                                    }
-                                )
+                                    )
+                                    .simultaneousGesture(LongPressGesture().onChanged() {_ in
+                                        let j = w + h*6
+                                        let dot = viewModel.dots.first { $0.dot == j }
+                                        color = dot?.color ?? .clear
+                                        animate.toggle()
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                            animate.toggle()
+                                        }
+                                    })
+                            }
                         }
                     }
                 }
@@ -169,10 +183,13 @@ extension Board6 {
                     Text("Select Board")
                         .font(.system(size: 20))
                         .foregroundColor(.white)
+                        .frame(width: 120)
                         .padding()
+                        .padding(.leading)
                         .background(
                             Capsule()
                                 .stroke(Color.white, lineWidth: 2.0)
+                                .padding(.leading)
                         )
                 })
                 Spacer()
@@ -184,23 +201,27 @@ extension Board6 {
                     Text("Show Solution")
                         .font(.system(size: 20))
                         .foregroundColor(.white)
+                        .frame(width: 150)
                         .padding()
                         .background(
                             Capsule()
                                 .stroke(Color.white, lineWidth: 2.0)
+                                .frame(width: 150)
                         )
                 } else {
                     Text("Hide Solution")
                         .font(.system(size: 20))
                         .foregroundColor(.white)
+                        .frame(width: 150)
                         .padding()
                         .background(
                             Capsule()
                                 .stroke(Color.white, lineWidth: 2.0)
+                                .frame(width: 150)
                         )
                 }
                 })
-            }.padding(.top, 15)
+            }
             Spacer()
         }
     }
@@ -216,10 +237,12 @@ extension Board6 {
                     Text("Select Board")
                         .font(.system(size: 35))
                         .foregroundColor(.white)
+                        .frame(width: 240)
                         .padding(25)
                         .background(
                             Capsule()
                                 .stroke(Color.white, lineWidth: 4.0)
+                                .padding(.leading)
                         )
                 })
                 Spacer()
@@ -231,23 +254,27 @@ extension Board6 {
                     Text("Show Solution")
                         .font(.system(size: 35))
                         .foregroundColor(.white)
+                        .frame(width: 240)
                         .padding(25)
                         .background(
                             Capsule()
                                 .stroke(Color.white, lineWidth: 4.0)
+                                .frame(width: 270)
                         )
                 } else {
                     Text("Hide Solution")
                         .font(.system(size: 35))
                         .foregroundColor(.white)
+                        .frame(width: 240)
                         .padding(25)
                         .background(
                             Capsule()
                                 .stroke(Color.white, lineWidth: 4.0)
+                                .frame(width: 270)
                         )
                 }
                 })
-            }.padding(.top, 15)
+            }
             Spacer()
         }
     }

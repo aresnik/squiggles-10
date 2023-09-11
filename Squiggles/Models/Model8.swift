@@ -74,40 +74,40 @@ final class Model8: ObservableObject {
     }
     
     func save() {
-        perfectGames = defaults.integer(forKey: "perfectGames8")
-        perfectStreak = defaults.integer(forKey: "perfectStreak8")
-        longestStreak = defaults.integer(forKey: "longestStreak8")
+        perfectGames = Int(NSUbiquitousKeyValueStore().double(forKey: "perfectGames8"))
+        perfectStreak = Int(NSUbiquitousKeyValueStore().double(forKey: "perfectStreak8"))
+        longestStreak = Int(NSUbiquitousKeyValueStore().double(forKey: "longestStreak8"))
         if message == "PERFECT!" {
             perfectGames += 1
             perfectStreak += 1
         } else {
             perfectStreak = 0
         }
-        elapsedBest = defaults.integer(forKey: "elapsedBest8")
+        if perfectStreak > longestStreak {
+            NSUbiquitousKeyValueStore().set(perfectStreak, forKey: "longestStreak8")
+        }
+        elapsedBest = Int(NSUbiquitousKeyValueStore().double(forKey: "elapsedBest8"))
         if elapsedBest == 0 {
             elapsedBest = elapsed
         }
         if elapsed <= elapsedBest {
-            defaults.set(elapsed, forKey: "elapsedBest8")
+            NSUbiquitousKeyValueStore().set(elapsed, forKey: "elapsedBest8")
         }
-        if perfectStreak > longestStreak {
-            defaults.set(perfectStreak, forKey: "longestStreak8")
-        }
-        defaults.set(moves, forKey: "moves8")
-        defaults.set(perfectGames, forKey: "perfectGames8")
-        defaults.set(perfectStreak, forKey: "perfectStreak8")
-        defaults.set(message, forKey: "message8")
-        defaults.set(time, forKey: "timeCurrent8")
+        NSUbiquitousKeyValueStore().set(perfectGames, forKey: "perfectGames8")
+        NSUbiquitousKeyValueStore().set(perfectStreak, forKey: "perfectStreak8")
+        NSUbiquitousKeyValueStore().set(message, forKey: "message8")
+        NSUbiquitousKeyValueStore().set(time, forKey: "timeCurrent8")
+        NSUbiquitousKeyValueStore().set(moves, forKey: "moves8")
     }
     
     func load() {
-        moves = defaults.integer(forKey: "moves8")
-        perfectGames = defaults.integer(forKey: "perfectGames8")
-        perfectStreak = defaults.integer(forKey: "perfectStreak8")
-        longestStreak = defaults.integer(forKey: "longestStreak8")
-        message = defaults.string(forKey: "message8") ?? ""
-        timeCurrent = defaults.string(forKey: "timeCurrent8") ?? ""
-        elapsedBest = defaults.integer(forKey: "elapsedBest8")
+        moves = Int(NSUbiquitousKeyValueStore().double(forKey: "moves8"))
+        perfectGames = Int(NSUbiquitousKeyValueStore().double(forKey: "perfectGames8"))
+        perfectStreak = Int(NSUbiquitousKeyValueStore().double(forKey: "perfectStreak8"))
+        longestStreak = Int(NSUbiquitousKeyValueStore().double(forKey: "longestStreak8"))
+        message = NSUbiquitousKeyValueStore().string(forKey: "message8") ?? ""
+        timeCurrent = NSUbiquitousKeyValueStore().string(forKey: "timeCurrent8") ?? ""
+        elapsedBest = Int(NSUbiquitousKeyValueStore().double(forKey: "elapsedBest8"))
         timeBest = createTimeString(seconds: elapsedBest)
     }
     
@@ -260,7 +260,7 @@ final class Model8: ObservableObject {
         do {
             let url =  Bundle.main.url(forResource: "move", withExtension: "mp3")
             soundPlayer = try AVAudioPlayer(contentsOf: url!)
-            soundPlayer.volume = 1.0
+            soundPlayer.volume = 0.5
             soundPlayer.prepareToPlay()
             soundPlayer.play()
         } catch let error {
@@ -272,7 +272,7 @@ final class Model8: ObservableObject {
         do {
             let url =  Bundle.main.url(forResource: "tada", withExtension: "mp3")
             soundPlayer = try AVAudioPlayer(contentsOf: url!)
-            soundPlayer.volume = 1.0
+            soundPlayer.volume = 0.2
             soundPlayer.prepareToPlay()
             soundPlayer.play()
         } catch let error {

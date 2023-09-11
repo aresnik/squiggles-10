@@ -13,7 +13,9 @@ private var solution: Bool = false
 struct Board8: View {
     
     @StateObject private var viewModel = Model8()
-    @State var GoToSelect = false
+    @State private var GoToSelect = false
+    @State private var animate = false
+    @State private var color: Color = .clear
     private var idiom: UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
     
     var body: some View {
@@ -57,7 +59,7 @@ extension Board8 {
                                 let dot = viewModel.dots.first { $0.dot == i }
                                 Circle()
                                     .fill(dot?.color ?? .clear)
-                                    .frame(width: screenWidth/12)
+                                    .frame(width: animate && color == dot?.color ? screenWidth/10 : screenWidth/12)
                             }
                         }
                     }
@@ -147,6 +149,15 @@ extension Board8 {
                                         viewModel.isSolved()
                                     }
                                 )
+                                .simultaneousGesture(LongPressGesture().onChanged() {_ in
+                                    let j = w + h*8
+                                    let dot = viewModel.dots.first { $0.dot == j }
+                                    color = dot?.color ?? .clear
+                                    animate.toggle()
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                        animate.toggle()
+                                    }
+                                })
                         }
                     }
                 }
@@ -169,10 +180,13 @@ extension Board8 {
                     Text("Select Board")
                         .font(.system(size: 20))
                         .foregroundColor(.white)
+                        .frame(width: 120)
                         .padding()
+                        .padding(.leading)
                         .background(
                             Capsule()
                                 .stroke(Color.white, lineWidth: 2.0)
+                                .padding(.leading)
                         )
                 })
                 Spacer()
@@ -184,23 +198,27 @@ extension Board8 {
                     Text("Show Solution")
                         .font(.system(size: 20))
                         .foregroundColor(.white)
+                        .frame(width: 150)
                         .padding()
                         .background(
                             Capsule()
                                 .stroke(Color.white, lineWidth: 2.0)
+                                .frame(width: 150)
                         )
                 } else {
                     Text("Hide Solution")
                         .font(.system(size: 20))
                         .foregroundColor(.white)
+                        .frame(width: 150)
                         .padding()
                         .background(
                             Capsule()
                                 .stroke(Color.white, lineWidth: 2.0)
+                                .frame(width: 150)
                         )
                 }
                 })
-            }.padding(.top, 15)
+            }
             Spacer()
         }
     }
@@ -216,10 +234,12 @@ extension Board8 {
                     Text("Select Board")
                         .font(.system(size: 35))
                         .foregroundColor(.white)
+                        .frame(width: 240)
                         .padding(25)
                         .background(
                             Capsule()
                                 .stroke(Color.white, lineWidth: 4.0)
+                                .padding(.leading)
                         )
                 })
                 Spacer()
@@ -231,23 +251,27 @@ extension Board8 {
                     Text("Show Solution")
                         .font(.system(size: 35))
                         .foregroundColor(.white)
+                        .frame(width: 240)
                         .padding(25)
                         .background(
                             Capsule()
                                 .stroke(Color.white, lineWidth: 4.0)
+                                .frame(width: 270)
                         )
                 } else {
                     Text("Hide Solution")
                         .font(.system(size: 35))
                         .foregroundColor(.white)
+                        .frame(width: 240)
                         .padding(25)
                         .background(
                             Capsule()
                                 .stroke(Color.white, lineWidth: 4.0)
+                                .frame(width: 270)
                         )
                 }
                 })
-            }.padding(.top, 15)
+            }
             Spacer()
         }
     }

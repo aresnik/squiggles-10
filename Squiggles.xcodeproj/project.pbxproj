@@ -57,6 +57,7 @@
 		468BAB4B29F7ED9A008724AD /* Start.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start.swift; sourceTree = "<group>"; };
 		468BAB4D29F7F30E008724AD /* Alert6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert6.swift; sourceTree = "<group>"; };
 		468BAB4F29F7FDD9008724AD /* move.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = move.mp3; sourceTree = "<group>"; };
+		46A265ED2A9E832300094613 /* Squiggles.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Squiggles.entitlements; sourceTree = "<group>"; };
 		46AE54132A03578F00CBDFCE /* End6.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = End6.swift; sourceTree = "<group>"; };
 		46AEEC5E29AD00ED00A5128F /* Squiggles 10.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Squiggles 10.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46AEEC6129AD00ED00A5128F /* SquigglesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquigglesApp.swift; sourceTree = "<group>"; };
@@ -153,6 +154,7 @@
 		46AEEC6029AD00ED00A5128F /* Squiggles */ = {
 			isa = PBXGroup;
 			children = (
+				46A265ED2A9E832300094613 /* Squiggles.entitlements */,
 				46AEEC6129AD00ED00A5128F /* SquigglesApp.swift */,
 				468BAB4B29F7ED9A008724AD /* Start.swift */,
 				462076832A57A9B000D89EEB /* Select.swift */,
@@ -396,6 +398,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Squiggles/Squiggles.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Squiggles/Preview Content\"";
@@ -429,6 +432,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Squiggles/Squiggles.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Squiggles/Preview Content\"";
