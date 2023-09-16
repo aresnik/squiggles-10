@@ -194,6 +194,8 @@
 			dependencies = (
 			);
 			name = Squiggles;
+			packageProductDependencies = (
+			);
 			productName = ConnecttheDots;
 			productReference = 46AEEC5E29AD00ED00A5128F /* Squiggles 10.app */;
 			productType = "com.apple.product-type.application";
@@ -222,6 +224,8 @@
 				Base,
 			);
 			mainGroup = 46AEEC5529AD00EC00A5128F;
+			packageReferences = (
+			);
 			productRefGroup = 46AEEC5F29AD00ED00A5128F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
