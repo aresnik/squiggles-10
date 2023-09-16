@@ -7,7 +7,6 @@
 
 import SwiftUI
 import AVFAudio
-import GameCenterKit
 
 final class Model6: ObservableObject {
 
